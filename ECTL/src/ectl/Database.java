@@ -1,4 +1,4 @@
-package mysql;
+package ectl;
 
 import java.sql.*;
 
