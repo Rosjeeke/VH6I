@@ -1,6 +1,8 @@
 
 package ectl;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Rogier
@@ -13,13 +15,34 @@ public class Main {
     public static void main(String[] args) {
         //Aanmaken nieuwe Database met de naam van de databank 
         Database db1 = new Database("myfirstdwh");
+        FixedWidthExtract fwe = new FixedWidthExtract();
         //een klant toevoegen
-        //db1.sqlUpdate("INSERT INTO klant VALUES('1' , 'J. van Drunen' , '0162686655', '0628956325', 'Made', 'NL', '5' )");
-        //De gegevens in de database uitprinten
-        System.out.println("Gegevens in de tabel voor verwijderen team J. van Drunen:");
-        db1.sqlExecute("SELECT * FROM klant");
-        // De gegevens in de database verwijderen
-        db1.sqlUpdate("DELETE FROM klant WHERE KlantNummer = '1'");
+        ArrayList<Klant> fweklanten = new ArrayList<Klant>();
+        Klant k1 = new Klant(1, "J. van drunen", "0162684569", "062584759631", "Made", "NL", 6);
+        Klant k2 = new Klant(2, "J. van drunen", "0162684569", "062584759631", "Made", "NL", 15);
+        fweklanten.add(k1);
+        fweklanten.add(k2);
+        int i = 0;
+        String query = "";
+        for(Klant k : fweklanten){
+            
+            if(i<1){
+            query = "INSERT INTO klant VALUES('"+k.getKlantNummer()+"', '"+k.getKlantNaam()+"', '"+k.getTelefoon()+"',"
+                        + " '"+k.getMobiel()+"', '"+k.getPlaats()+"', '"+k.getLand()+"', '"+k.getPercentage()+"' )";
+            i++;}
+            else{
+                query += ",('"+k.getKlantNummer()+"', '"+k.getKlantNaam()+"', '"+k.getTelefoon()+"'," + " '"+k.getMobiel()+"', '"+k.getPlaats()+"', '"+k.getLand()+"', '"+k.getPercentage()+"' )";
+            }
+            
+        
+        }
+        db1.sqlUpdate(query);
+//        db1.sqlUpdate("INSERT INTO klant VALUES('1' , 'J. van Drunen' , '0162686655', '0628956325', 'Made', 'NL', '5' )");
+//        //De gegevens in de database uitprinten
+
+//        db1.sqlExecute("SELECT * FROM klant");
+//        // De gegevens in de database verwijderen
+//        db1.sqlUpdate("DELETE FROM klant WHERE KlantNummer = '1'");
 
         //Sluiten van de verbinding
         boolean y = false;
