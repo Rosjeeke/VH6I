@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package ExcelExtract;
+package ectl;
 
 import java.io.File;
 import java.io.IOException;
@@ -25,9 +25,9 @@ public class ExtractA2{
         klanten = new ArrayList<Klant>();
     }
        
-    public void read(){
+    public void read(String bestand){
         try {
-            Workbook workbook = Workbook.getWorkbook(new File("C://Users/Liannie/Google Drive/School/VH6I/ETL/A2.xls"));
+            Workbook workbook = Workbook.getWorkbook(new File(bestand));
             Sheet sheet = workbook.getSheet(0);
             int aantalrijen = sheet.getRows();
                         
