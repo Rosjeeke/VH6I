@@ -1,12 +1,11 @@
-package Procedures;
+package ectl.Procedures;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.util.Scanner;
 import ectl.ExtractA2;
-
-import GUI.MainFrame;
+import ectl.GUI.MainFrame;
 
 //Determines which procedure this file should go through. A request is sent in by MainFrame.
 public class ProcedureController {
@@ -47,8 +46,10 @@ public class ProcedureController {
 		}
 		else if(extension.equals(".xls")){
 			System.out.println("Excel");
+                        System.out.println(path);
                         ExtractA2 excelextracter = new ExtractA2();
-                        excelextracter.read(path);
+                        System.out.println("PICK ME!");
+                        //excelextracter.read(path);
 		}
 		else if(extension.equals(".mdb")){
 			System.out.println("MDB");
