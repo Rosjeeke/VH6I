@@ -35,6 +35,7 @@ public class MainFrame extends JFrame {
 	private JLabel lblStatus;
 	private File file = null;
 	private MainFrame mf = this;
+        private String path;
 
 	/**
 	 * Launch the application.
@@ -90,6 +91,7 @@ public class MainFrame extends JFrame {
 						file = fc.getSelectedFile();
 						//This is where the application would open the file.
 						textField.setText(file.getAbsolutePath());
+                                                path = textField.getText();
 						//setText currentfile
 						int dotPos = file.getName().lastIndexOf(".");
 						String extension = file.getName().substring(dotPos);
@@ -107,7 +109,7 @@ public class MainFrame extends JFrame {
 		JButton btnRun = new JButton("Run");
 		btnRun.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				new ProcedureController(file, mf);
+				new ProcedureController(file, mf, path);
 			}
 		});
 		btnRun.setBounds(160, 70, 80, 20);

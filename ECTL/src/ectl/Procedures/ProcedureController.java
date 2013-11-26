@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.util.Scanner;
+import ectl.ExtractA2;
 
 import GUI.MainFrame;
 
@@ -15,7 +16,7 @@ public class ProcedureController {
 	private String extension;
 	private MainFrame mf;
 
-	public ProcedureController(File file, MainFrame mainFrame){
+	public ProcedureController(File file, MainFrame mainFrame, String path){
 		this.file = file;
 		this.mf = mainFrame;
 		Scanner x = null;
@@ -46,6 +47,8 @@ public class ProcedureController {
 		}
 		else if(extension.equals(".xls")){
 			System.out.println("Excel");
+                        ExtractA2 excelextracter = new ExtractA2();
+                        excelextracter.read(path);
 		}
 		else if(extension.equals(".mdb")){
 			System.out.println("MDB");
