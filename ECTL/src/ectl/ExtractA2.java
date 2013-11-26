@@ -23,14 +23,18 @@ public class ExtractA2{
     
     public ExtractA2(){
         klanten = new ArrayList<Klant>();
+        System.out.println("PUDDING, BITCH!");
     }
        
     public void read(String bestand){
         try {
+            System.out.println("Functie gestart");
             Workbook workbook = Workbook.getWorkbook(new File(bestand));
+            System.out.println("Bestand geladen");
             Sheet sheet = workbook.getSheet(0);
             int aantalrijen = sheet.getRows();
-                        
+            System.out.println("Wat is er toch aan de hand?");
+            
             int rij = 1;
             while(rij<aantalrijen){
                 Cell nr = sheet.getCell(0, rij);
@@ -51,6 +55,7 @@ public class ExtractA2{
             
         } catch (IOException | BiffException ex) {
             Logger.getLogger(ExtractA2.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("Fuck, hoe lossen we dit op...? :x");
         }
         
         
