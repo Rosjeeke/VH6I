@@ -69,4 +69,8 @@ public class ExtractA2 {
     }
     */
     
+    public ArrayList<Klant> getKlanten(){
+            return klanten;
+        }
+    
 }
