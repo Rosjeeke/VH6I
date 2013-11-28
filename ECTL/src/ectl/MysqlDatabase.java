@@ -6,7 +6,7 @@ import java.sql.*;
  *
  * @author Rogier
  */
-public class Database {
+public class MysqlDatabase {
 
     private Connection con;
 
@@ -17,7 +17,7 @@ public class Database {
      * @param databasenaam naam van de database waarmee automatisch verbinding
      * gemaakt wordt
      */
-    public Database(String databasenaam) {
+    public MysqlDatabase(String databasenaam) {
 
         String connectiestring;
 

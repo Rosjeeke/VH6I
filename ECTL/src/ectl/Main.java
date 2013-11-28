@@ -14,7 +14,7 @@ public class Main {
      */
     public static void main(String[] args) {
         //Aanmaken nieuwe Database met de naam van de databank 
-        Database db1 = new Database("myfirstdwh");
+        MysqlDatabase db1 = new MysqlDatabase("myfirstdwh");
         //Aanmaken van de verschillende extract klassen.
         FixedWidthExtract fwe = new FixedWidthExtract();
         ExtractA2 exce = new ExtractA2();
