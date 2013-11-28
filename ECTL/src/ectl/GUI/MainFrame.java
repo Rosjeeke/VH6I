@@ -130,7 +130,7 @@ public class MainFrame extends JFrame{
 				
 			}
 		});
-		btnClean.setBounds(160, 150, 80, 20);
+		btnTransform.setBounds(160, 150, 80, 20);
 		panel.add(btnTransform);
                 
                 JButton btnLoad = new JButton("Load");
