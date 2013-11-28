@@ -1,23 +1,30 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package ectl.GUI;
 
 import ectl.Procedures.ProcedureController;
 import java.awt.EventQueue;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JTextField;
-import javax.swing.border.TitledBorder;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.File;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.io.File;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.TitledBorder;
 
-public class MainFrame extends JFrame {
-
-	private JPanel contentPane;
+/**
+ *
+ * @author Liannie
+ */
+public class MainFrame extends JFrame{
+    private JPanel contentPane;
 	private JTextField textField;
 	private JComboBox comboBox;
 	private JButton btnBrowse;
@@ -108,5 +115,4 @@ public class MainFrame extends JFrame {
 		panel.add(btnRun);
 
 	}
-
 }

@@ -1,16 +1,22 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package ectl.Procedures;
 
+import ectl.ExtractA2;
+import ectl.GUI.MainFrame;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.util.Scanner;
-import ectl.ExtractA2;
-import ectl.GUI.MainFrame;
 
-//Determines which procedure this file should go through. A request is sent in by MainFrame.
+/**
+ *
+ * @author Liannie
+ */
 public class ProcedureController {
-
-	private File file;
+    private File file;
 	private Boolean hasnext;
 	private String extension;
 	private MainFrame mf;
@@ -47,10 +53,9 @@ public class ProcedureController {
 		}
 		else if(extension.equals(".xls")){
 			System.out.println("Excel");
-                        System.out.println(path);
                         excel = new ExtractA2();
-                        System.out.println("PICK ME!");
-                        //excelextracter.read(path);
+                        excel.read(path);
+                        //excel.print();
 		}
 		else if(extension.equals(".mdb")){
 			System.out.println("MDB");
@@ -58,5 +63,5 @@ public class ProcedureController {
 
 		else{ System.out.println("Invalid file.."); }
 	}
-
+    
 }

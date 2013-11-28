@@ -18,22 +18,18 @@ import jxl.read.biff.BiffException;
  *
  * @author Liannie
  */
-public class ExtractA2{
+public class ExtractA2 {
     private ArrayList<Klant> klanten;
     
     public ExtractA2(){
         klanten = new ArrayList<Klant>();
-        System.out.println("PUDDING, BITCH!");
     }
        
     public void read(String bestand){
         try {
-            System.out.println("Functie gestart");
             Workbook workbook = Workbook.getWorkbook(new File(bestand));
-            System.out.println("Bestand geladen");
             Sheet sheet = workbook.getSheet(0);
             int aantalrijen = sheet.getRows();
-            System.out.println("Wat is er toch aan de hand?");
             
             int rij = 1;
             while(rij<aantalrijen){
@@ -55,12 +51,22 @@ public class ExtractA2{
             
         } catch (IOException | BiffException ex) {
             Logger.getLogger(ExtractA2.class.getName()).log(Level.SEVERE, null, ex);
-            System.out.println("Fuck, hoe lossen we dit op...? :x");
         }
         
         
         
         
     }
+    
+    /*
+    public void print(){
+        int teller = 0;
+        int max = klanten.size();
+        while (teller<max){
+            System.out.println(klanten.get(teller));
+            teller++;
+        }
+    }
+    */
     
 }

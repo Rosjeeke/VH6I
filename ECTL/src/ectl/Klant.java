@@ -9,7 +9,6 @@ package ectl;
  * @author Liannie
  */
 public class Klant {
-
     private int klantNummer;
     private String klantNaam;
     private String telefoon;
@@ -55,4 +54,5 @@ public class Klant {
     public int getPercentage() {
         return percentage;
     }
+    
 }
