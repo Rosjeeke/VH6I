@@ -14,6 +14,7 @@ public class ProcedureController {
 	private Boolean hasnext;
 	private String extension;
 	private MainFrame mf;
+        private ExtractA2 excel;
 
 	public ProcedureController(File file, MainFrame mainFrame, String path){
 		this.file = file;
@@ -47,7 +48,7 @@ public class ProcedureController {
 		else if(extension.equals(".xls")){
 			System.out.println("Excel");
                         System.out.println(path);
-                        ExtractA2 excelextracter = new ExtractA2();
+                        excel = new ExtractA2();
                         System.out.println("PICK ME!");
                         //excelextracter.read(path);
 		}

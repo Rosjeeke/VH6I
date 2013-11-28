@@ -2,17 +2,9 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package ExcelExtract;
+package ectl;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import jxl.Cell;
-import jxl.Sheet;
-import jxl.Workbook;
-import jxl.read.biff.BiffException;
+import ectl.ExtractA2;
 
 /**
  *
@@ -27,6 +19,6 @@ public class Main_1 {
         // TODO code application logic here
         
         ExtractA2 excelextracter = new ExtractA2();
-        excelextracter.read();
+        //excelextracter.read();
     }
 }
