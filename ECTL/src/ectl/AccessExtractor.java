@@ -19,11 +19,11 @@ public class AccessExtractor {
         klanten = new ArrayList<Klant>();
     }
     
-    public void Extractor()
+    public void extractor(String path)
     {
         try
         {
-            Database db = DatabaseBuilder.open(new File(file));
+            Database db = DatabaseBuilder.open(new File(path));
             Table table = db.getTable("Klant");
             for(Row row : table) 
             {
@@ -51,5 +51,9 @@ public class AccessExtractor {
         {
             System.out.println(klant);   
         }
+    }
+    
+    public ArrayList<Klant> getKlanten(){
+        return klanten;
     }
 }
