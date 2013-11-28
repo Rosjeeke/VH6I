@@ -17,7 +17,7 @@ import java.util.Scanner;
  *
  * @author Liannie
  */
-public class ProcedureController {
+public class Extract {
     private File file;
 	private Boolean hasnext;
 	private String extension;
@@ -26,7 +26,7 @@ public class ProcedureController {
         private FixedWidthExtract txt;
         private AccessExtractor access;
 
-	public ProcedureController(File file, MainFrame mainFrame, String path){
+	public Extract(File file, MainFrame mainFrame, String path){
 		this.file = file;
 		this.mf = mainFrame;
 		Scanner x = null;

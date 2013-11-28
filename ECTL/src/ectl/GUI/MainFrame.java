@@ -4,7 +4,7 @@
  */
 package ectl.GUI;
 
-import ectl.Procedures.ProcedureController;
+import ectl.Procedures.Extract;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -28,6 +28,7 @@ public class MainFrame extends JFrame{
 	private JTextField textField;
 	private JComboBox comboBox;
 	private JButton btnBrowse;
+        private JButton clean;
 	private JFileChooser fc;
 	private JPanel panel;
 	private JLabel lblCurrentfile;
@@ -59,7 +60,7 @@ public class MainFrame extends JFrame{
 		setResizable(false);
 		setTitle("VH6B2 - ECTL");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 280,150);
+		setBounds(100, 100, 480,350);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -67,7 +68,7 @@ public class MainFrame extends JFrame{
 
 		panel = new JPanel();
 		panel.setBorder(new TitledBorder(null, "Select File", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel.setBounds(12, 10, 250, 100);
+		panel.setBounds(12, 10, 450, 300);
 		contentPane.add(panel);
 		panel.setLayout(null);
 
@@ -105,14 +106,42 @@ public class MainFrame extends JFrame{
 		btnBrowse.setBounds(160, 23, 80, 20);
 		panel.add(btnBrowse);
 
-		JButton btnRun = new JButton("Run");
-		btnRun.addActionListener(new ActionListener() {
+		JButton btnExtract = new JButton("Extract");
+		btnExtract.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				new ProcedureController(file, mf, path);
+				new Extract(file, mf, path);
 			}
 		});
-		btnRun.setBounds(160, 70, 80, 20);
-		panel.add(btnRun);
+		btnExtract.setBounds(160, 70, 80, 20);
+		panel.add(btnExtract);
+                
+                JButton btnClean = new JButton("Clean");
+		btnClean.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+			}
+		});
+		btnClean.setBounds(160, 110, 80, 20);
+		panel.add(btnClean);
+                
+                JButton btnTransform = new JButton("Transform");
+		btnTransform.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+			}
+		});
+		btnClean.setBounds(160, 150, 80, 20);
+		panel.add(btnTransform);
+                
+                JButton btnLoad = new JButton("Load");
+		btnClean.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+			}
+		});
+		btnLoad.setBounds(160, 190, 80, 20);
+		panel.add(btnLoad);
+                
 
 	}
 }
