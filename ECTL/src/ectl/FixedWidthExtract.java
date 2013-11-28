@@ -16,15 +16,15 @@ import java.util.ArrayList;
  */
 public class FixedWidthExtract {
 
-    private ArrayList<Klant> klanten;
+    private ArrayList<Klant> klantenfwe;
 
     public FixedWidthExtract() {
-        klanten = new ArrayList<Klant>();
+        klantenfwe = new ArrayList<Klant>();
     }
 
-    public void extract() {
+    public void extract(String path) {
         try {
-            BufferedReader in = new BufferedReader(new FileReader("C:\\Users\\Ivo\\Documents\\School\\vh6\\ECTL\\A4.txt"));//Het pad naar het bestand moet je aanpassen naar de locatie op je eigen PC.
+            BufferedReader in = new BufferedReader(new FileReader(path));//Het pad naar het bestand moet je aanpassen naar de locatie op je eigen PC.
             String regel;
             while ((regel = in.readLine()) != null) {
                 int klantNummer = Integer.parseInt(regel.substring(0, 8).replaceAll("\\s", ""));
@@ -37,7 +37,7 @@ public class FixedWidthExtract {
 
                 Klant klant = new Klant(klantNummer, klantNaam, klantTelefoon, klantMobiel, klantPlaats, klantLand, klantPercentage);
 
-                klanten.add(klant);
+                klantenfwe.add(klant);
             }
             in.close();
         } catch (FileNotFoundException e) {
@@ -48,7 +48,7 @@ public class FixedWidthExtract {
         }
     }
     
-    public ArrayList getKlanten(){
-        return klanten;
+    public ArrayList<Klant> getKlanten(){
+        return klantenfwe;
     }
 }
