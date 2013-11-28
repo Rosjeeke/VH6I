@@ -9,6 +9,10 @@ import java.util.ArrayList;
  */
 public class Main {
     
+    private FixedWidthExtract fwe;
+    private ExtractA2 exce;
+    private AccessExtractor access;
+    
     /**
      * @param args the command line arguments
      */
@@ -58,7 +62,7 @@ public class Main {
 
         //Sluiten van de verbinding
         boolean y = false;
-        y = db1.Sluitconnectie();
+        db1.Sluitconnectie();
         if (y) {
             System.out.println("Database verbinding gesloten!");
         } else {

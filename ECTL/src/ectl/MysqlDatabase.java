@@ -88,17 +88,17 @@ public class MysqlDatabase {
      *
      * @return boolean die succesvol is als hij gesloten wordt
      */
-    public boolean Sluitconnectie() {
-
+    public void Sluitconnectie() {
         boolean x = false;
         try {
             if (con != null) {
                 con.close();
+                System.out.println("Database verbinding niet gesloten!");
                 x = true;
             }
         } catch (SQLException e) {
+            System.out.println("Database verbinding gesloten!");
             x = false;
         }
-        return x;
     }
 }
