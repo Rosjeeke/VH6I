@@ -4,7 +4,9 @@
  */
 package ectl.Procedures;
 
+import ectl.AccessExtractor;
 import ectl.ExtractA2;
+import ectl.FixedWidthExtract;
 import ectl.GUI.MainFrame;
 import java.io.BufferedReader;
 import java.io.File;
@@ -21,6 +23,8 @@ public class ProcedureController {
 	private String extension;
 	private MainFrame mf;
         private ExtractA2 excel;
+        private FixedWidthExtract txt;
+        private AccessExtractor access;
 
 	public ProcedureController(File file, MainFrame mainFrame, String path){
 		this.file = file;
@@ -43,6 +47,9 @@ public class ProcedureController {
 				}
 				else {
 					System.out.println("TXT");
+                                        txt = new FixedWidthExtract();
+                                        txt.extract(path);
+                                        
 				}
 			}
 			catch(Exception e){
@@ -59,6 +66,8 @@ public class ProcedureController {
 		}
 		else if(extension.equals(".mdb")){
 			System.out.println("MDB");
+                        access = new AccessExtractor();
+                        access.extractor(path);
 		}
 
 		else{ System.out.println("Invalid file.."); }
