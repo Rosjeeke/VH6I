@@ -11,7 +11,6 @@ import java.util.ArrayList;
 
 public class AccessExtractor {
     
-    private static String file = System.getProperty("user.home") + "\\Dropbox\\DVP6IB2 - junior BI-consultant\\Bronbestanden\\A1.mdb";
     public ArrayList<Klant> klanten;
     
     public AccessExtractor()
@@ -29,8 +28,8 @@ public class AccessExtractor {
             {
                 int klantNummer = (int)row.get("KlantId");
                 String klantNaam = row.get("KlantNaam").toString();
-                String telefoon = row.get("TelNo").toString();
-                String mobiel = row.get("MobNo").toString();
+                String telefoon = row.get("Telefoon").toString();
+                String mobiel = row.get("Mobiel").toString();
                 String plaats = row.get("Plaats").toString();
                 String land = row.get("Land").toString();
                 int percentage = (int)row.get("Korting");
