@@ -5,7 +5,7 @@
 package ectl.Procedures;
 
 import ectl.AccessExtractor;
-import ectl.ExtractA2;
+import ectl.ExcelExtract;
 import ectl.FixedWidthExtract;
 import ectl.GUI.MainFrame;
 import java.io.BufferedReader;
@@ -22,7 +22,7 @@ public class Extract {
 	private Boolean hasnext;
 	private String extension;
 	private MainFrame mf;
-        private ExtractA2 excel;
+        private ExcelExtract  excel;
         private FixedWidthExtract txt;
         private AccessExtractor access;
 
@@ -60,7 +60,7 @@ public class Extract {
 		}
 		else if(extension.equals(".xls")){
 			System.out.println("Excel");
-                        excel = new ExtractA2();
+                        excel = new ExcelExtract ();
                         excel.read(path);
                         //excel.print();
 		}
