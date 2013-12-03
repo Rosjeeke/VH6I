@@ -4,6 +4,8 @@
  */
 package ectl;
 
+import java.math.BigDecimal;
+
 /**
  *
  * @author Liannie
@@ -16,9 +18,9 @@ public class Klant {
     private String mobiel;
     private String plaats;
     private String land;
-    private int percentage;
+    private BigDecimal percentage;
 
-    public Klant(int klantNummer, String klantNaam, String telefoon, String mobiel, String plaats, String land, int percentage) {
+    public Klant(int klantNummer, String klantNaam, String telefoon, String mobiel, String plaats, String land, BigDecimal percentage) {
         this.klantNummer = klantNummer;
         this.klantNaam = klantNaam;
         this.telefoon = telefoon;
@@ -76,11 +78,11 @@ public class Klant {
         this.land = land;
     }
 
-    public int getPercentage() {
+    public BigDecimal getPercentage() {
         return percentage;
     }
     
-    public void setPercentage(int percentage){
+    public void setPercentage(BigDecimal percentage){
         this.percentage = percentage;
     }
 }

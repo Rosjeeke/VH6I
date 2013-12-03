@@ -8,6 +8,7 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 
 /**
@@ -33,7 +34,7 @@ public class FixedWidthExtract {
                 String klantMobiel = regel.substring(56, 72).replaceAll("\\s", "");
                 String klantPlaats = regel.substring(72, 88).replaceAll("\\s", "");
                 String klantLand = regel.substring(88, 94).replaceAll("\\s", "");
-                int klantPercentage = Integer.parseInt(regel.substring(94, 96).replaceAll("\\s", ""));
+                BigDecimal klantPercentage = new BigDecimal((regel.substring(94, 96).replaceAll("\\s", "")));
 
                 Klant klant = new Klant(klantNummer, klantNaam, klantTelefoon, klantMobiel, klantPlaats, klantLand, klantPercentage);
 

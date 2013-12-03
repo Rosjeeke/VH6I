@@ -2,6 +2,7 @@ package ectl;
 
 import com.healthmarketscience.jackcess.*;
 import java.io.File;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 
 /**
@@ -32,7 +33,7 @@ public class AccessExtractor {
                 String mobiel = row.get("Mobiel").toString();
                 String plaats = row.get("Plaats").toString();
                 String land = row.get("Land").toString();
-                int percentage = (int)row.get("Korting");
+                BigDecimal percentage = new BigDecimal((String)row.get("Korting"));
                 
                 Klant nieuw = new Klant(klantNummer, klantNaam, telefoon, mobiel, plaats, land, percentage);
                 klanten.add(nieuw);

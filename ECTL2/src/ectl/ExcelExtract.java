@@ -6,6 +6,7 @@ package ectl;
 
 import java.io.File;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -40,7 +41,8 @@ public class ExcelExtract {
                 Cell plaats = sheet.getCell(3, rij);
                 Cell land = sheet.getCell(4, rij);
                 Cell percentage = sheet.getCell(5, rij);
-                int percentageInt = Integer.parseInt(percentage.getContents());
+                BigDecimal percentageInt = new BigDecimal(percentage.getContents());
+                        //Integer.parseInt(percentage.getContents());
                 
                 Klant nieuw = new Klant(nrInt, naam.getContents(), telefoon.getContents(), "", plaats.getContents(), land.getContents(), percentageInt);
                 klanten.add(nieuw);

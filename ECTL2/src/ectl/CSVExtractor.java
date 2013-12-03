@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -32,7 +33,7 @@ public class CSVExtractor {
                             klantLand = matcher.group(1);
                         }
                         //String klantLand = splitedString[5];
-                        int klantPercentage = Integer.parseInt(splitedString[5]);
+                        BigDecimal klantPercentage = new BigDecimal(splitedString[5]);
                         
                     Klant klant = new Klant(klantNummer, klantNaam, klantTelefoon, klantMobiel, klantPlaats, klantLand, klantPercentage);
 
