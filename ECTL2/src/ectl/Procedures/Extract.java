@@ -8,9 +8,11 @@ import ectl.AccessExtractor;
 import ectl.ExcelExtract;
 import ectl.FixedWidthExtract;
 import ectl.GUI.MainFrame;
+import ectl.Klant;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -22,11 +24,13 @@ public class Extract {
 	private Boolean hasnext;
 	private String extension;
 	private MainFrame mf;
-        private ExcelExtract  excel;
+        private ExcelExtract excel;
         private FixedWidthExtract txt;
         private AccessExtractor access;
+        private ArrayList<Klant> klanten;
 
 	public Extract(File file, MainFrame mainFrame, String path){
+                klanten = new ArrayList<Klant>();
 		this.file = file;
 		this.mf = mainFrame;
 		Scanner x = null;
@@ -49,6 +53,7 @@ public class Extract {
 					System.out.println("TXT");
                                         txt = new FixedWidthExtract();
                                         txt.extract(path);
+                                        klanten = txt.getKlanten();
                                         
 				}
 			}
@@ -60,17 +65,23 @@ public class Extract {
 		}
 		else if(extension.equals(".xls")){
 			System.out.println("Excel");
-                        excel = new ExcelExtract ();
+                        excel = new ExcelExtract();
                         excel.read(path);
                         //excel.print();
+                        excel.getKlanten();
 		}
 		else if(extension.equals(".mdb")){
 			System.out.println("MDB");
                         access = new AccessExtractor();
                         access.extractor(path);
+                        access.getKlanten();
 		}
 
 		else{ System.out.println("Invalid file.."); }
 	}
+        
+        public ArrayList<Klant> getKlanten(){
+            return klanten;
+        }
     
 }

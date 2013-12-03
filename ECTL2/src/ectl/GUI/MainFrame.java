@@ -4,11 +4,14 @@
  */
 package ectl.GUI;
 
+import ectl.Klant;
 import ectl.Procedures.Extract;
+import ectl.Transform;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
@@ -36,6 +39,7 @@ public class MainFrame extends JFrame{
 	private File file = null;
 	private MainFrame mf = this;
         private String path;
+        private ArrayList<Klant> klanten;
 
 	/**
 	 * Launch the application.
@@ -57,6 +61,7 @@ public class MainFrame extends JFrame{
 	 * Create the frame.
 	 */
 	public MainFrame() {
+                klanten = new ArrayList<Klant>();
 		setResizable(false);
 		setTitle("VH6B2 - ECTL");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -109,7 +114,8 @@ public class MainFrame extends JFrame{
 		JButton btnExtract = new JButton("Extract");
 		btnExtract.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				new Extract(file, mf, path);
+				Extract extract = new Extract(file, mf, path);
+                                klanten = extract.getKlanten();
 			}
 		});
 		btnExtract.setBounds(160, 70, 80, 20);
@@ -127,7 +133,7 @@ public class MainFrame extends JFrame{
                 JButton btnTransform = new JButton("Transform");
 		btnTransform.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				
+				Transform transform = new Transform();
 			}
 		});
 		btnTransform.setBounds(160, 150, 80, 20);

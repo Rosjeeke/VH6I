@@ -21,7 +21,7 @@ import jxl.read.biff.BiffException;
 public class ExcelExtract {
     private ArrayList<Klant> klanten;
     
-    public ExcelExtract (){
+    public ExcelExtract(){
         klanten = new ArrayList<Klant>();
     }
        
@@ -37,13 +37,12 @@ public class ExcelExtract {
                 int nrInt = Integer.parseInt(nr.getContents());
                 Cell naam = sheet.getCell(1, rij);
                 Cell telefoon = sheet.getCell(2, rij);
-                Cell mobiel = sheet.getCell(3, rij);
-                Cell plaats = sheet.getCell(4, rij);
-                Cell land = sheet.getCell(5, rij);
-                Cell percentage = sheet.getCell(6, rij);
+                Cell plaats = sheet.getCell(3, rij);
+                Cell land = sheet.getCell(4, rij);
+                Cell percentage = sheet.getCell(5, rij);
                 int percentageInt = Integer.parseInt(percentage.getContents());
                 
-                Klant nieuw = new Klant(nrInt, naam.getContents(), telefoon.getContents(), mobiel.getContents(), plaats.getContents(), land.getContents(), percentageInt);
+                Klant nieuw = new Klant(nrInt, naam.getContents(), telefoon.getContents(), "", plaats.getContents(), land.getContents(), percentageInt);
                 klanten.add(nieuw);
                 
                 rij++;
