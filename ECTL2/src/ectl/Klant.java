@@ -9,6 +9,7 @@ package ectl;
  * @author Liannie
  */
 public class Klant {
+
     private int klantNummer;
     private String klantNaam;
     private String telefoon;
@@ -31,28 +32,55 @@ public class Klant {
         return klantNummer;
     }
 
+    public void setKlantNummer(int klantNummer) {
+        this.klantNummer = klantNummer;
+    }
+
     public String getKlantNaam() {
         return klantNaam;
+    }
+
+    public void setKlantNaam(String klantNaam) {
+        this.klantNaam = klantNaam;
     }
 
     public String getTelefoon() {
         return telefoon;
     }
 
+    public void setTelefoon(String telefoon) {
+        this.telefoon = telefoon;
+    }
+
     public String getMobiel() {
         return mobiel;
+    }
+
+    public void setMobiel(String mobiel) {
+        this.mobiel = mobiel;
     }
 
     public String getPlaats() {
         return plaats;
     }
+    
+    public void setPlaats(String plaats){
+        this.plaats = plaats;
+    }
 
     public String getLand() {
         return land;
+    }
+    
+    public void setLand(String land){
+        this.land = land;
     }
 
     public int getPercentage() {
         return percentage;
     }
     
+    public void setPercentage(int percentage){
+        this.percentage = percentage;
+    }
 }
