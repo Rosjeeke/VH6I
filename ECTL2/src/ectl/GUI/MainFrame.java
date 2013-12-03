@@ -6,7 +6,7 @@ package ectl.GUI;
 
 import ectl.Klant;
 import ectl.Procedures.Extract;
-import ectl.Transform;
+import ectl.Procedures.Transform;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -48,8 +48,10 @@ public class MainFrame extends JFrame{
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					MainFrame frame = new MainFrame();
-					frame.setVisible(true);
+//					MainFrame frame = new MainFrame();
+//					frame.setVisible(true);
+                                        Transform transform = new Transform();
+                                        transform.Transform();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
