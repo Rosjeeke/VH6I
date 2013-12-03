@@ -16,7 +16,7 @@ public class CSVExtractor {
                  BufferedReader in = new BufferedReader(new FileReader(path));
                  String line;
                  while ((line = in.readLine()) != null){
-                    String[] splitedString = line.split(",");
+                    String[] splitedString = line.split(";");
                     
                         int klantNummer = Integer.parseInt(splitedString[0]);
                         String klantNaam = splitedString[1];
