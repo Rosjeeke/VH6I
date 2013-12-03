@@ -25,7 +25,7 @@ public class CSVExtractor {
                         String klantNaam = splitedString[1];
                         String klantTelefoon = splitedString[2];
                         String klantMobiel = splitedString[3];
-                        String klantPlaats = splitedString[4];
+                        String klantPlaats = splitedString[4].replaceAll("\\(.*\\)", "").replaceAll("\\s", "");
                         Pattern pattern = Pattern.compile(".* \\(([A-Z]+)\\)");
                         Matcher matcher = pattern.matcher(klantPlaats);
                         if (matcher.matches()) {
