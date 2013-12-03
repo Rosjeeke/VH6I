@@ -18,10 +18,10 @@ import jxl.read.biff.BiffException;
  *
  * @author Liannie
  */
-public class ExtractA2 {
+public class ExcelExtract {
     private ArrayList<Klant> klanten;
     
-    public ExtractA2(){
+    public ExcelExtract (){
         klanten = new ArrayList<Klant>();
     }
        
@@ -50,7 +50,7 @@ public class ExtractA2 {
             }
             
         } catch (IOException | BiffException ex) {
-            Logger.getLogger(ExtractA2.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ExcelExtract.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         
