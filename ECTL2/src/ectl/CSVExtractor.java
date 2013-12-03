@@ -5,6 +5,8 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class CSVExtractor {
 	
@@ -17,14 +19,20 @@ public class CSVExtractor {
                  String line;
                  while ((line = in.readLine()) != null){
                     String[] splitedString = line.split(";");
+                    String klantLand = "";
                     
                         int klantNummer = Integer.parseInt(splitedString[0]);
                         String klantNaam = splitedString[1];
                         String klantTelefoon = splitedString[2];
                         String klantMobiel = splitedString[3];
                         String klantPlaats = splitedString[4];
-                        String klantLand = splitedString[5];
-                        int klantPercentage = Integer.parseInt(splitedString[6]);
+                        Pattern pattern = Pattern.compile(".* \\(([A-Z]+)\\)");
+                        Matcher matcher = pattern.matcher(klantPlaats);
+                        if (matcher.matches()) {
+                            klantLand = matcher.group(1);
+                        }
+                        //String klantLand = splitedString[5];
+                        int klantPercentage = Integer.parseInt(splitedString[5]);
                         
                     Klant klant = new Klant(klantNummer, klantNaam, klantTelefoon, klantMobiel, klantPlaats, klantLand, klantPercentage);
 
