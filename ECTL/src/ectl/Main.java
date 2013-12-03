@@ -19,14 +19,18 @@ public class Main {
     public static void main(String[] args) {
         //Aanmaken nieuwe Database met de naam van de databank 
         MysqlDatabase db1 = new MysqlDatabase("myfirstdwh");
+        
         //Aanmaken van de verschillende extract klassen.
         FixedWidthExtract fwe = new FixedWidthExtract();
         ExtractA2 exce = new ExtractA2();
         AccessExtractor access = new AccessExtractor();
+        CSVExtractor csv = new CSVExtractor();
+        
         //een klant toevoegen
         fwe.extract(System.getProperty("user.home") + "\\Dropbox\\DVP6IB2 - junior BI-consultant\\Bronbestanden\\Klant\\A4.txt");
         exce.read(System.getProperty("user.home") + "\\Dropbox\\DVP6IB2 - junior BI-consultant\\Bronbestanden\\Klant\\A2.xls");
         access.extractor(System.getProperty("user.home") + "\\Dropbox\\DVP6IB2 - junior BI-consultant\\Bronbestanden\\Klant\\A1.mdb");
+        csv.csvExtract(System.getProperty("user.home") + "\\Dropbox\\DVP6IB2 - junior BI-consultant\\Bronbestanden\\Klant\\A3.txt");
         
 //        Klant k1 = new Klant(1, "J. van drunen", "0162684569", "062584759631", "Made", "NL", 6);
 //        Klant k2 = new Klant(2, "J. van drunen", "0162684569", "062584759631", "Made", "NL", 15);
@@ -35,13 +39,18 @@ public class Main {
         
         int i = 0;
         String query = "";
+        
         ArrayList<Klant> klanten = new ArrayList<Klant>();
         ArrayList<Klant> klantenfwe = fwe.getKlanten();
         ArrayList<Klant> klantenexce = exce.getKlanten();
         ArrayList<Klant> klantenaccess = access.getKlanten();
+        ArrayList<Klant> klantencsv = csv.getKlanten();
+        
         klanten.addAll(klantenfwe);
         klanten.addAll(klantenexce);
         klanten.addAll(klantenaccess);
+        klanten.addAll(klantencsv);
+        
         for(Klant k : klanten){
             
             if(i<1){

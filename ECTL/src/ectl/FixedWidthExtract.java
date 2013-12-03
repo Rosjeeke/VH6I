@@ -28,7 +28,7 @@ public class FixedWidthExtract {
             String regel;
             while ((regel = in.readLine()) != null) {
                 int klantNummer = Integer.parseInt(regel.substring(0, 8).replaceAll("\\s", ""));
-                String klantNaam = regel.substring(8, 40).replaceAll("\\s", "");
+                String klantNaam = regel.substring(8, 40).replaceAll("\\s+", " ");
                 String klantTelefoon = regel.substring(40, 56).replaceAll("\\s", "");
                 String klantMobiel = regel.substring(56, 72).replaceAll("\\s", "");
                 String klantPlaats = regel.substring(72, 88).replaceAll("\\s", "");
