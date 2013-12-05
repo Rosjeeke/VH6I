@@ -4,6 +4,7 @@
  */
 package ETL.GUI;
 
+import ETL.ExcelExtract;
 import Rommel.Klant;
 import Rommel.Extract;
 import Rommel.Transform;
@@ -50,8 +51,8 @@ public class MainFrame extends JFrame{
 				try {
 //					MainFrame frame = new MainFrame();
 //					frame.setVisible(true);
-                                        Transform transform = new Transform();
-                                        transform.Transform();
+                                        ExcelExtract transform = new ExcelExtract();
+                                        transform.read(System.getProperty("user.home") + "\\Dropbox\\DVP6IB2 - junior BI-consultant\\Bronbestanden\\test2.xls");
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
