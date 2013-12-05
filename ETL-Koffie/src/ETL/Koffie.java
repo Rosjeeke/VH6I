@@ -19,7 +19,7 @@ public class Koffie {
     private String soort;
     private String formaat;
     private String smaak;
-    private int uPC;
+    private String uPC;
     private int eenKwartaalZeven;
     private int tweeKwartaalZeven;
     private int drieKwartaalZeven;
@@ -31,7 +31,7 @@ public class Koffie {
     
 
     public Koffie(String majorBrand, String apparaat, String type, String beleving, String soort,
-            String formaat, String smaak, int uPC) {
+            String formaat, String smaak, String uPC) {
         this.majorBrand = majorBrand;
         this.apparaat = apparaat;
         this.type = type;
@@ -106,11 +106,11 @@ public class Koffie {
         this.smaak = smaak;
     }
 
-    public int getUPC() {
+    public String getUPC() {
         return uPC;
     }
 
-    public void setUPC(int uPC) {
+    public void setUPC(String uPC) {
         this.uPC = uPC;
     }
 
