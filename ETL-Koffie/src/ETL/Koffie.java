@@ -20,18 +20,12 @@ public class Koffie {
     private String formaat;
     private String smaak;
     private String uPC;
-    private int eenKwartaalZeven;
-    private int tweeKwartaalZeven;
-    private int drieKwartaalZeven;
-    private int vierKwartaalZeven;
-    private int eenKwartaalAcht;
-    private int tweeKwartaalAcht;
-    private int drieKwartaalAcht;
-    private int vierKwartaalAcht;
+    private String eenKwartaalZeven, tweeKwartaalZeven, drieKwartaalZeven, vierKwartaalZeven, eenKwartaalAcht, tweeKwartaalAcht, drieKwartaalAcht, vierKwartaalAcht, superMarkt;
     
 
     public Koffie(String majorBrand, String apparaat, String type, String beleving, String soort,
-            String formaat, String smaak, String uPC) {
+            String formaat, String smaak, String uPC, String eenKwartaalZeven, String tweeKwartaalZeven,
+            String drieKwartaalZeven, String vierKwartaalZeven, String eenKwartaalAcht, String tweeKwartaalAcht, String drieKwartaalAcht, String vierKwartaalAcht, String superMarkt) {
         this.majorBrand = majorBrand;
         this.apparaat = apparaat;
         this.type = type;
@@ -40,14 +34,15 @@ public class Koffie {
         this.formaat = formaat;
         this.smaak = smaak;
         this.uPC = uPC;   
-        this.eenKwartaalZeven = 0;
-        this.tweeKwartaalZeven = 0;
-        this.drieKwartaalZeven = 0;
-        this.vierKwartaalZeven = 0;
-        this.eenKwartaalAcht = 0;
-        this.tweeKwartaalAcht = 0;
-        this.drieKwartaalAcht = 0;
-        this.vierKwartaalAcht = 0;
+        this.eenKwartaalZeven = eenKwartaalZeven;
+        this.tweeKwartaalZeven = tweeKwartaalZeven;
+        this.drieKwartaalZeven = drieKwartaalZeven;
+        this.vierKwartaalZeven = vierKwartaalZeven;
+        this.eenKwartaalAcht = eenKwartaalAcht;
+        this.tweeKwartaalAcht = tweeKwartaalAcht;
+        this.drieKwartaalAcht = drieKwartaalAcht;
+        this.vierKwartaalAcht = vierKwartaalAcht;
+        this.superMarkt = superMarkt;
     }
 
     public String getMajorBrand() {
@@ -114,36 +109,43 @@ public class Koffie {
         this.uPC = uPC;
     }
 
-    public void setEenKwartaalZeven(int eenKwartaalZeven) {
+    public void setEenKwartaalZeven(String eenKwartaalZeven) {
         this.eenKwartaalZeven = eenKwartaalZeven;
     }
 
-    public void setTweeKwartaalZeven(int tweeKwartaalZeven) {
+    public String getEenKwartaalZeven(){
+        return eenKwartaalZeven;
+    }
+    public void setTweeKwartaalZeven(String tweeKwartaalZeven) {
         this.tweeKwartaalZeven = tweeKwartaalZeven;
     }
 
-    public void setDrieKwartaalZeven(int drieKwartaalZeven) {
+    public void setDrieKwartaalZeven(String drieKwartaalZeven) {
         this.drieKwartaalZeven = drieKwartaalZeven;
     }
 
-    public void setVierKwartaalZeven(int vierKwartaalZeven) {
+    public void setVierKwartaalZeven(String vierKwartaalZeven) {
         this.vierKwartaalZeven = vierKwartaalZeven;
     }
 
-    public void setEenKwartaalAcht(int eenKwartaalAcht) {
+    public void setEenKwartaalAcht(String eenKwartaalAcht) {
         this.eenKwartaalAcht = eenKwartaalAcht;
     }
 
-    public void setTweeKwartaalAcht(int tweeKwartaalAcht) {
+    public void setTweeKwartaalAcht(String tweeKwartaalAcht) {
         this.tweeKwartaalAcht = tweeKwartaalAcht;
     }
 
-    public void setDrieKwartaalAcht(int drieKwartaalAcht) {
+    public void setDrieKwartaalAcht(String drieKwartaalAcht) {
         this.drieKwartaalAcht = drieKwartaalAcht;
     }
 
-    public void setVierKwartaalAcht(int vierKwartaalAcht) {
+    public void setVierKwartaalAcht(String vierKwartaalAcht) {
         this.vierKwartaalAcht = vierKwartaalAcht;
+    }
+    
+    public void setSuperMarkt(String superMarkt){
+        this.superMarkt = superMarkt;
     }
 
     

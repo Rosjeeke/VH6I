@@ -52,7 +52,8 @@ public class MainFrame extends JFrame{
 //					MainFrame frame = new MainFrame();
 //					frame.setVisible(true);
                                         ExcelExtract transform = new ExcelExtract();
-                                        transform.read(System.getProperty("user.home") + "\\Dropbox\\DVP6IB2 - junior BI-consultant\\Bronbestanden\\test2.xls");
+                                        transform.infoScanRead(System.getProperty("user.home") + "\\Dropbox\\DVP6IB2 - junior BI-consultant\\Bronbestanden\\test2.xls");
+                                        transform.superMarktRead(System.getProperty("user.home") + "\\Dropbox\\DVP6IB2 - junior BI-consultant\\Bronbestanden\\test3.xls", 2, 3187, "Albert Heijn");
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
