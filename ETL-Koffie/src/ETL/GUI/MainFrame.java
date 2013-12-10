@@ -6,6 +6,7 @@ package ETL.GUI;
 
 import ETL.ExcelExtract;
 import Rommel.Klant;
+import Rommel.Extract;
 import Rommel.Transform;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
@@ -52,7 +53,7 @@ public class MainFrame extends JFrame{
 //					frame.setVisible(true);
                                         ExcelExtract transform = new ExcelExtract();
                                         transform.infoScanRead(System.getProperty("user.home") + "\\Dropbox\\DVP6IB2 - junior BI-consultant\\Opdracht 6 BCG Matrix\\datadump1.xls", 3);
-                                        transform.extractSwitch(System.getProperty("user.home") + "\\Dropbox\\DVP6IB2 - junior BI-consultant\\Opdracht 6 BCG Matrix\\datadump1.xls", 3);
+                                        transform.extractSwitch(System.getProperty("user.home") + "\\Dropbox\\DVP6IB2 - junior BI-consultant\\Opdracht 6 BCG Matrix\\datadump1.xls", 2);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -117,8 +118,8 @@ public class MainFrame extends JFrame{
 		JButton btnExtract = new JButton("Extract");
 		btnExtract.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				//Extract extract = new Extract(file, mf, path);
-                                //klanten = extract.getKlanten();
+				Extract extract = new Extract(file, mf, path);
+                                klanten = extract.getKlanten();
 			}
 		});
 		btnExtract.setBounds(160, 70, 80, 20);
