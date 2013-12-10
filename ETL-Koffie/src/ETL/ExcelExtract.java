@@ -4,10 +4,8 @@
  */
 package ETL;
 
-import Rommel.Klant;
 import java.io.File;
 import java.io.IOException;
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -24,12 +22,13 @@ import jxl.read.biff.BiffException;
  */
 public class ExcelExtract {
 
-    private ArrayList<Koffie> koffie;
+    private ArrayList<Koffie> koffie, superMarkten, albert, superboer, c1000, superunie, coop, hoogvliet, jumbo, vomar, jan, deen, bonimarkt, plus;
     private String brand, apparaat, type, beleving, soort, formaat, smaak, upc,
             vorige1, vorige2, vorige3, vorige4, vorige5;
 
     public ExcelExtract() {
         koffie = new ArrayList<>();
+        superMarkten = new ArrayList<>();
     }
 
     public void infoScanRead(String bestand, int begin) {
@@ -38,7 +37,7 @@ public class ExcelExtract {
             Sheet sheet = workbook.getSheet(0);
 
             int rij = begin;
-            int eind = sheet.findCell("Albert Heijn").getRow() - 2;
+            int eind = sheet.findCell("Albert Heijn").getRow() - 1;
             while (rij < eind) {
                 Cell code = sheet.getCell(0, rij);
                 Cell string = sheet.getCell(1, rij);
@@ -85,7 +84,7 @@ public class ExcelExtract {
                             upc = matcher.group(1);
                         }
 
-                        System.out.println("UPC: " + upc);
+//                        System.out.println("UPC: " + upc);
                         Koffie kf = new Koffie(brand, apparaat, type, beleving, soort, formaat, smaak, upc, "", "", "", "", "", "", "", "", "");
 
                         koffie.add(kf);
@@ -113,26 +112,43 @@ public class ExcelExtract {
 
     public void extractSwitch(String bestand, int begin) {
         try {
-            ArrayList<Koffie> superMarkten = new ArrayList<>();
+            albert = new ArrayList<>();
+            superboer = new ArrayList<>();
+            c1000 = new ArrayList<>();
+            superunie = new ArrayList<>();
+            coop = new ArrayList<>();
+            hoogvliet = new ArrayList<>();
+            jumbo = new ArrayList<>();
+            vomar = new ArrayList<>();
+            jan = new ArrayList<>();
+            deen = new ArrayList<>();
+            bonimarkt = new ArrayList<>();
+            plus = new ArrayList<>();
             for (Koffie kof : koffie) {
-                superMarkten.add(kof);
+                albert.add(kof);
+                superboer.add(kof);
+                c1000.add(kof);
+                superunie.add(kof);
+                coop.add(kof);
+                hoogvliet.add(kof);
+                jumbo.add(kof);
+                vomar.add(kof);
+                jan.add(kof);
+                deen.add(kof);
+                bonimarkt.add(kof);
+                plus.add(kof);
             }
             Workbook workbook1 = Workbook.getWorkbook(new File(bestand));
             Sheet sheet = workbook1.getSheet(0);
             int aantalrijen = sheet.getRows();
 
-            int rij = begin;
 
-            while (rij < aantalrijen) {
-                Cell code = sheet.getCell(1, rij);
-
+            while (begin < aantalrijen) {
+                Cell code = sheet.getCell(1, begin);
                 switch ((code.getContents()).toString()) {
-                    case "Infoscan supermarkten":
-                        infoScanRead(bestand, 3);
-                        break;
                     case "Albert Heijn":
                         int beginExtractAH = sheet.findCell("Albert Heijn").getRow();
-                        int eindAH = sheet.findCell("Super de Boer").getRow() - 2;
+                        int eindAH = 6375;
                         String superMarktAH = "Albert Heijn";
 
 
@@ -146,7 +162,7 @@ public class ExcelExtract {
                                         upc = matcher.group(1);
                                     }
 
-                                    for (Koffie k : superMarkten) {
+                                    for (Koffie k : albert) {
                                         if (upc.equals(k.getUPC())) {
                                             String kwartaalEenZeven = sheet.getCell(2, beginExtractAH).getContents();
 
@@ -173,7 +189,7 @@ public class ExcelExtract {
                                                         k.setDrieKwartaalAcht(kwartaalDrieAcht);
                                                         k.setVierKwartaalAcht(kwartaalVierAcht);
                                                         k.setSuperMarkt(superMarktAH);
-                                                        System.out.println(k.getUPC() + " " + kwartaalEenZeven + " " + kwartaalTweeZeven + " " + kwartaalDrieZeven + " " + kwartaalVierZeven + " " + kwartaalEenAcht + " " + kwartaalTweeAcht + " " + kwartaalDrieAcht + " " + kwartaalVierAcht);
+                                                        System.out.println(superMarktAH + " " + k.getUPC() + " " + kwartaalEenZeven + " " + kwartaalTweeZeven + " " + kwartaalDrieZeven + " " + kwartaalVierZeven + " " + kwartaalEenAcht + " " + kwartaalTweeAcht + " " + kwartaalDrieAcht + " " + kwartaalVierAcht);
                                                         break outerloop;
                                                     }
                                                 }
@@ -194,7 +210,7 @@ public class ExcelExtract {
                                                 k.setDrieKwartaalAcht(kwartaalDrieAcht);
                                                 k.setVierKwartaalAcht(kwartaalVierAcht);
                                                 k.setSuperMarkt(superMarktAH);
-                                                System.out.println(k.getUPC() + " " + kwartaalEenZeven + " " + kwartaalTweeZeven + " " + kwartaalDrieZeven + " " + kwartaalVierZeven + " " + kwartaalEenAcht + " " + kwartaalTweeAcht + " " + kwartaalDrieAcht + " " + kwartaalVierAcht);
+                                                System.out.println(superMarktAH + " " + k.getUPC() + " " + kwartaalEenZeven + " " + kwartaalTweeZeven + " " + kwartaalDrieZeven + " " + kwartaalVierZeven + " " + kwartaalEenAcht + " " + kwartaalTweeAcht + " " + kwartaalDrieAcht + " " + kwartaalVierAcht);
 
                                             }
                                         }
@@ -206,7 +222,7 @@ public class ExcelExtract {
                             break;
                         case "Super de Boer":
                         int beginExtractSB = sheet.findCell("Super de Boer").getRow();
-                        int eindSB = sheet.findCell("C1000").getRow() - 2;
+                        int eindSB = sheet.findCell("C1000").getRow() - 1;
                         String superMarktSB = "Super de Boer";
 
                             while (beginExtractSB < eindSB) {
@@ -219,7 +235,7 @@ public class ExcelExtract {
                                         upc = matcher.group(1);
                                     }
 
-                                    for (Koffie k : superMarkten) {
+                                    for (Koffie k : superboer) {
                                         if (upc.equals(k.getUPC())) {
                                             String kwartaalEenZeven = sheet.getCell(2, beginExtractSB).getContents();
 
@@ -246,7 +262,7 @@ public class ExcelExtract {
                                                         k.setDrieKwartaalAcht(kwartaalDrieAcht);
                                                         k.setVierKwartaalAcht(kwartaalVierAcht);
                                                         k.setSuperMarkt(superMarktSB);
-                                                        System.out.println(k.getUPC() + " " + kwartaalEenZeven + " " + kwartaalTweeZeven + " " + kwartaalDrieZeven + " " + kwartaalVierZeven + " " + kwartaalEenAcht + " " + kwartaalTweeAcht + " " + kwartaalDrieAcht + " " + kwartaalVierAcht);
+                                                        System.out.println(superMarktSB + " " + k.getUPC() + " " + kwartaalEenZeven + " " + kwartaalTweeZeven + " " + kwartaalDrieZeven + " " + kwartaalVierZeven + " " + kwartaalEenAcht + " " + kwartaalTweeAcht + " " + kwartaalDrieAcht + " " + kwartaalVierAcht);
                                                         break outerloop;
                                                     }
                                                 }
@@ -267,7 +283,7 @@ public class ExcelExtract {
                                                 k.setDrieKwartaalAcht(kwartaalDrieAcht);
                                                 k.setVierKwartaalAcht(kwartaalVierAcht);
                                                 k.setSuperMarkt(superMarktSB);
-                                                System.out.println(k.getUPC() + " " + kwartaalEenZeven + " " + kwartaalTweeZeven + " " + kwartaalDrieZeven + " " + kwartaalVierZeven + " " + kwartaalEenAcht + " " + kwartaalTweeAcht + " " + kwartaalDrieAcht + " " + kwartaalVierAcht);
+                                                System.out.println(superMarktSB + " " + k.getUPC() + " " + kwartaalEenZeven + " " + kwartaalTweeZeven + " " + kwartaalDrieZeven + " " + kwartaalVierZeven + " " + kwartaalEenAcht + " " + kwartaalTweeAcht + " " + kwartaalDrieAcht + " " + kwartaalVierAcht);
 
                                             }
                                         }
@@ -278,7 +294,7 @@ public class ExcelExtract {
                             break;
                         case "C1000":
                         int beginExtractC1 = sheet.findCell("C1000").getRow();
-                        int eindC1 = sheet.findCell("Superunie").getRow() - 2;
+                        int eindC1 = sheet.findCell("Superunie").getRow() - 1;
                         String superMarktC1 = "C1000";
 
                             while (beginExtractC1 < eindC1) {
@@ -291,7 +307,7 @@ public class ExcelExtract {
                                         upc = matcher.group(1);
                                     }
 
-                                    for (Koffie k : superMarkten) {
+                                    for (Koffie k : c1000) {
                                         if (upc.equals(k.getUPC())) {
                                             String kwartaalEenZeven = sheet.getCell(2, beginExtractC1).getContents();
 
@@ -318,7 +334,7 @@ public class ExcelExtract {
                                                         k.setDrieKwartaalAcht(kwartaalDrieAcht);
                                                         k.setVierKwartaalAcht(kwartaalVierAcht);
                                                         k.setSuperMarkt(superMarktC1);
-                                                        System.out.println(k.getUPC() + " " + kwartaalEenZeven + " " + kwartaalTweeZeven + " " + kwartaalDrieZeven + " " + kwartaalVierZeven + " " + kwartaalEenAcht + " " + kwartaalTweeAcht + " " + kwartaalDrieAcht + " " + kwartaalVierAcht);
+                                                        System.out.println(superMarktC1 + " " + k.getUPC() + " " + kwartaalEenZeven + " " + kwartaalTweeZeven + " " + kwartaalDrieZeven + " " + kwartaalVierZeven + " " + kwartaalEenAcht + " " + kwartaalTweeAcht + " " + kwartaalDrieAcht + " " + kwartaalVierAcht);
                                                         break outerloop;
                                                     }
                                                 }
@@ -339,7 +355,7 @@ public class ExcelExtract {
                                                 k.setDrieKwartaalAcht(kwartaalDrieAcht);
                                                 k.setVierKwartaalAcht(kwartaalVierAcht);
                                                 k.setSuperMarkt(superMarktC1);
-                                                System.out.println(k.getUPC() + " " + kwartaalEenZeven + " " + kwartaalTweeZeven + " " + kwartaalDrieZeven + " " + kwartaalVierZeven + " " + kwartaalEenAcht + " " + kwartaalTweeAcht + " " + kwartaalDrieAcht + " " + kwartaalVierAcht);
+                                                System.out.println(superMarktC1 + " " + k.getUPC() + " " + kwartaalEenZeven + " " + kwartaalTweeZeven + " " + kwartaalDrieZeven + " " + kwartaalVierZeven + " " + kwartaalEenAcht + " " + kwartaalTweeAcht + " " + kwartaalDrieAcht + " " + kwartaalVierAcht);
 
                                             }
                                         }
@@ -349,8 +365,8 @@ public class ExcelExtract {
                             }
                             break;
                         case "Superunie":
-                        int beginExtractSU = sheet.findCell("Superunie").getRow();
-                        int eindSU = sheet.findCell("COOP Totaal").getRow() - 2;
+                        int beginExtractSU = 12756;
+                        int eindSU = 15944;
                         String superMarktSU = "Superunie";
 
                             while (beginExtractSU < eindSU) {
@@ -363,7 +379,7 @@ public class ExcelExtract {
                                         upc = matcher.group(1);
                                     }
 
-                                    for (Koffie k : superMarkten) {
+                                    for (Koffie k : superunie) {
                                         if (upc.equals(k.getUPC())) {
                                             String kwartaalEenZeven = sheet.getCell(2, beginExtractSU).getContents();
 
@@ -390,7 +406,7 @@ public class ExcelExtract {
                                                         k.setDrieKwartaalAcht(kwartaalDrieAcht);
                                                         k.setVierKwartaalAcht(kwartaalVierAcht);
                                                         k.setSuperMarkt(superMarktSU);
-                                                        System.out.println(k.getUPC() + " " + kwartaalEenZeven + " " + kwartaalTweeZeven + " " + kwartaalDrieZeven + " " + kwartaalVierZeven + " " + kwartaalEenAcht + " " + kwartaalTweeAcht + " " + kwartaalDrieAcht + " " + kwartaalVierAcht);
+                                                        System.out.println(superMarktSU + " " + k.getUPC() + " " + kwartaalEenZeven + " " + kwartaalTweeZeven + " " + kwartaalDrieZeven + " " + kwartaalVierZeven + " " + kwartaalEenAcht + " " + kwartaalTweeAcht + " " + kwartaalDrieAcht + " " + kwartaalVierAcht);
                                                         break outerloop;
                                                     }
                                                 }
@@ -411,7 +427,7 @@ public class ExcelExtract {
                                                 k.setDrieKwartaalAcht(kwartaalDrieAcht);
                                                 k.setVierKwartaalAcht(kwartaalVierAcht);
                                                 k.setSuperMarkt(superMarktSU);
-                                                System.out.println(k.getUPC() + " " + kwartaalEenZeven + " " + kwartaalTweeZeven + " " + kwartaalDrieZeven + " " + kwartaalVierZeven + " " + kwartaalEenAcht + " " + kwartaalTweeAcht + " " + kwartaalDrieAcht + " " + kwartaalVierAcht);
+                                                System.out.println(superMarktSU + " " + k.getUPC() + " " + kwartaalEenZeven + " " + kwartaalTweeZeven + " " + kwartaalDrieZeven + " " + kwartaalVierZeven + " " + kwartaalEenAcht + " " + kwartaalTweeAcht + " " + kwartaalDrieAcht + " " + kwartaalVierAcht);
 
                                             }
                                         }
@@ -420,9 +436,9 @@ public class ExcelExtract {
                                 beginExtractSU++;
                             }
                             break;
-                        case "COOP Totaal":
-                        int beginExtractCO = sheet.findCell("COOP Totaal").getRow();
-                        int eindCO = sheet.findCell("Hoogvliet").getRow() - 2;
+                        case " COOP Totaal":
+                        int beginExtractCO = 15945;
+                        int eindCO = 19135;
                         String superMarktCO = "COOP Totaal";
 
                             while (beginExtractCO < eindCO) {
@@ -435,7 +451,7 @@ public class ExcelExtract {
                                         upc = matcher.group(1);
                                     }
 
-                                    for (Koffie k : superMarkten) {
+                                    for (Koffie k : coop) {
                                         if (upc.equals(k.getUPC())) {
                                             String kwartaalEenZeven = sheet.getCell(2, beginExtractCO).getContents();
 
@@ -462,7 +478,7 @@ public class ExcelExtract {
                                                         k.setDrieKwartaalAcht(kwartaalDrieAcht);
                                                         k.setVierKwartaalAcht(kwartaalVierAcht);
                                                         k.setSuperMarkt(superMarktCO);
-                                                        System.out.println(k.getUPC() + " " + kwartaalEenZeven + " " + kwartaalTweeZeven + " " + kwartaalDrieZeven + " " + kwartaalVierZeven + " " + kwartaalEenAcht + " " + kwartaalTweeAcht + " " + kwartaalDrieAcht + " " + kwartaalVierAcht);
+                                                        System.out.println(superMarktCO + " " + k.getUPC() + " " + kwartaalEenZeven + " " + kwartaalTweeZeven + " " + kwartaalDrieZeven + " " + kwartaalVierZeven + " " + kwartaalEenAcht + " " + kwartaalTweeAcht + " " + kwartaalDrieAcht + " " + kwartaalVierAcht);
                                                         break outerloop;
                                                     }
                                                 }
@@ -483,7 +499,7 @@ public class ExcelExtract {
                                                 k.setDrieKwartaalAcht(kwartaalDrieAcht);
                                                 k.setVierKwartaalAcht(kwartaalVierAcht);
                                                 k.setSuperMarkt(superMarktCO);
-                                                System.out.println(k.getUPC() + " " + kwartaalEenZeven + " " + kwartaalTweeZeven + " " + kwartaalDrieZeven + " " + kwartaalVierZeven + " " + kwartaalEenAcht + " " + kwartaalTweeAcht + " " + kwartaalDrieAcht + " " + kwartaalVierAcht);
+                                                System.out.println(superMarktCO + " " + k.getUPC() + " " + kwartaalEenZeven + " " + kwartaalTweeZeven + " " + kwartaalDrieZeven + " " + kwartaalVierZeven + " " + kwartaalEenAcht + " " + kwartaalTweeAcht + " " + kwartaalDrieAcht + " " + kwartaalVierAcht);
 
                                             }
                                         }
@@ -492,9 +508,9 @@ public class ExcelExtract {
                                 beginExtractCO++;
                             }
                             break;
-                        case "Hoogvliet":
-                        int beginExtractHV = sheet.findCell("Hoogvliet").getRow();
-                        int eindHV = sheet.findCell("Jumbo").getRow() - 2;
+                        case " Hoogvliet":
+                        int beginExtractHV = sheet.findCell(" Hoogvliet").getRow();
+                        int eindHV = sheet.findCell(" Jumbo").getRow() - 1;
                         String superMarktHV = "Hoogvliet";
 
                             while (beginExtractHV < eindHV) {
@@ -507,7 +523,7 @@ public class ExcelExtract {
                                         upc = matcher.group(1);
                                     }
 
-                                    for (Koffie k : superMarkten) {
+                                    for (Koffie k : hoogvliet) {
                                         if (upc.equals(k.getUPC())) {
                                             String kwartaalEenZeven = sheet.getCell(2, beginExtractHV).getContents();
 
@@ -534,7 +550,7 @@ public class ExcelExtract {
                                                         k.setDrieKwartaalAcht(kwartaalDrieAcht);
                                                         k.setVierKwartaalAcht(kwartaalVierAcht);
                                                         k.setSuperMarkt(superMarktHV);
-                                                        System.out.println(k.getUPC() + " " + kwartaalEenZeven + " " + kwartaalTweeZeven + " " + kwartaalDrieZeven + " " + kwartaalVierZeven + " " + kwartaalEenAcht + " " + kwartaalTweeAcht + " " + kwartaalDrieAcht + " " + kwartaalVierAcht);
+                                                        System.out.println(superMarktHV + " " + k.getUPC() + " " + kwartaalEenZeven + " " + kwartaalTweeZeven + " " + kwartaalDrieZeven + " " + kwartaalVierZeven + " " + kwartaalEenAcht + " " + kwartaalTweeAcht + " " + kwartaalDrieAcht + " " + kwartaalVierAcht);
                                                         break outerloop;
                                                     }
                                                 }
@@ -555,7 +571,7 @@ public class ExcelExtract {
                                                 k.setDrieKwartaalAcht(kwartaalDrieAcht);
                                                 k.setVierKwartaalAcht(kwartaalVierAcht);
                                                 k.setSuperMarkt(superMarktHV);
-                                                System.out.println(k.getUPC() + " " + kwartaalEenZeven + " " + kwartaalTweeZeven + " " + kwartaalDrieZeven + " " + kwartaalVierZeven + " " + kwartaalEenAcht + " " + kwartaalTweeAcht + " " + kwartaalDrieAcht + " " + kwartaalVierAcht);
+                                                System.out.println(superMarktHV + " " + k.getUPC() + " " + kwartaalEenZeven + " " + kwartaalTweeZeven + " " + kwartaalDrieZeven + " " + kwartaalVierZeven + " " + kwartaalEenAcht + " " + kwartaalTweeAcht + " " + kwartaalDrieAcht + " " + kwartaalVierAcht);
 
                                             }
                                         }
@@ -564,9 +580,9 @@ public class ExcelExtract {
                                 beginExtractHV++;
                             }
                             break;
-                        case "Jumbo":
-                        int beginExtractJU = sheet.findCell("Jumbo").getRow();
-                        int eindJU = sheet.findCell("Vomar").getRow() - 2;
+                        case " Jumbo":
+                        int beginExtractJU = sheet.findCell(" Jumbo").getRow();
+                        int eindJU = sheet.findCell(" Vomar").getRow() - 2;
                         String superMarktJU = "Jumbo";
 
                             while (beginExtractJU < eindJU) {
@@ -579,7 +595,7 @@ public class ExcelExtract {
                                         upc = matcher.group(1);
                                     }
 
-                                    for (Koffie k : superMarkten) {
+                                    for (Koffie k : jumbo) {
                                         if (upc.equals(k.getUPC())) {
                                             String kwartaalEenZeven = sheet.getCell(2, beginExtractJU).getContents();
 
@@ -606,7 +622,7 @@ public class ExcelExtract {
                                                         k.setDrieKwartaalAcht(kwartaalDrieAcht);
                                                         k.setVierKwartaalAcht(kwartaalVierAcht);
                                                         k.setSuperMarkt(superMarktJU);
-                                                        System.out.println(k.getUPC() + " " + kwartaalEenZeven + " " + kwartaalTweeZeven + " " + kwartaalDrieZeven + " " + kwartaalVierZeven + " " + kwartaalEenAcht + " " + kwartaalTweeAcht + " " + kwartaalDrieAcht + " " + kwartaalVierAcht);
+                                                        System.out.println(superMarktJU + " " + k.getUPC() + " " + kwartaalEenZeven + " " + kwartaalTweeZeven + " " + kwartaalDrieZeven + " " + kwartaalVierZeven + " " + kwartaalEenAcht + " " + kwartaalTweeAcht + " " + kwartaalDrieAcht + " " + kwartaalVierAcht);
                                                         break outerloop;
                                                     }
                                                 }
@@ -627,7 +643,7 @@ public class ExcelExtract {
                                                 k.setDrieKwartaalAcht(kwartaalDrieAcht);
                                                 k.setVierKwartaalAcht(kwartaalVierAcht);
                                                 k.setSuperMarkt(superMarktJU);
-                                                System.out.println(k.getUPC() + " " + kwartaalEenZeven + " " + kwartaalTweeZeven + " " + kwartaalDrieZeven + " " + kwartaalVierZeven + " " + kwartaalEenAcht + " " + kwartaalTweeAcht + " " + kwartaalDrieAcht + " " + kwartaalVierAcht);
+                                                System.out.println(superMarktJU + " " + k.getUPC() + " " + kwartaalEenZeven + " " + kwartaalTweeZeven + " " + kwartaalDrieZeven + " " + kwartaalVierZeven + " " + kwartaalEenAcht + " " + kwartaalTweeAcht + " " + kwartaalDrieAcht + " " + kwartaalVierAcht);
 
                                             }
                                         }
@@ -636,9 +652,9 @@ public class ExcelExtract {
                                 beginExtractJU++;
                             }
                             break;
-                        case "Vomar":
-                        int beginExtractVO = sheet.findCell("Vomar").getRow();
-                        int eindVO = sheet.findCell("Jan Linders").getRow() - 2;
+                        case " Vomar":
+                        int beginExtractVO = sheet.findCell(" Vomar").getRow();
+                        int eindVO = sheet.findCell(" Jan Linders").getRow() - 2;
                         String superMarktVO = "Vomar";
 
                             while (beginExtractVO < eindVO) {
@@ -651,7 +667,7 @@ public class ExcelExtract {
                                         upc = matcher.group(1);
                                     }
 
-                                    for (Koffie k : superMarkten) {
+                                    for (Koffie k : vomar) {
                                         if (upc.equals(k.getUPC())) {
                                             String kwartaalEenZeven = sheet.getCell(2, beginExtractVO).getContents();
 
@@ -678,7 +694,7 @@ public class ExcelExtract {
                                                         k.setDrieKwartaalAcht(kwartaalDrieAcht);
                                                         k.setVierKwartaalAcht(kwartaalVierAcht);
                                                         k.setSuperMarkt(superMarktVO);
-                                                        System.out.println(k.getUPC() + " " + kwartaalEenZeven + " " + kwartaalTweeZeven + " " + kwartaalDrieZeven + " " + kwartaalVierZeven + " " + kwartaalEenAcht + " " + kwartaalTweeAcht + " " + kwartaalDrieAcht + " " + kwartaalVierAcht);
+                                                        System.out.println(superMarktVO + " " + k.getUPC() + " " + kwartaalEenZeven + " " + kwartaalTweeZeven + " " + kwartaalDrieZeven + " " + kwartaalVierZeven + " " + kwartaalEenAcht + " " + kwartaalTweeAcht + " " + kwartaalDrieAcht + " " + kwartaalVierAcht);
                                                         break outerloop;
                                                     }
                                                 }
@@ -699,7 +715,7 @@ public class ExcelExtract {
                                                 k.setDrieKwartaalAcht(kwartaalDrieAcht);
                                                 k.setVierKwartaalAcht(kwartaalVierAcht);
                                                 k.setSuperMarkt(superMarktVO);
-                                                System.out.println(k.getUPC() + " " + kwartaalEenZeven + " " + kwartaalTweeZeven + " " + kwartaalDrieZeven + " " + kwartaalVierZeven + " " + kwartaalEenAcht + " " + kwartaalTweeAcht + " " + kwartaalDrieAcht + " " + kwartaalVierAcht);
+                                                System.out.println(superMarktVO + " " + k.getUPC() + " " + kwartaalEenZeven + " " + kwartaalTweeZeven + " " + kwartaalDrieZeven + " " + kwartaalVierZeven + " " + kwartaalEenAcht + " " + kwartaalTweeAcht + " " + kwartaalDrieAcht + " " + kwartaalVierAcht);
 
                                             }
                                         }
@@ -708,9 +724,9 @@ public class ExcelExtract {
                                 beginExtractVO++;
                             }
                             break;
-                        case "Jan Linders":
-                        int beginExtractJL = sheet.findCell("Jan Linders").getRow();
-                        int eindJL = sheet.findCell("Deen").getRow() - 2;
+                        case " Jan Linders":
+                        int beginExtractJL = sheet.findCell(" Jan Linders").getRow();
+                        int eindJL = sheet.findCell(" Deen").getRow() - 2;
                         String superMarktJL = "Jan Linders";
 
                             while (beginExtractJL < eindJL) {
@@ -723,7 +739,7 @@ public class ExcelExtract {
                                         upc = matcher.group(1);
                                     }
 
-                                    for (Koffie k : superMarkten) {
+                                    for (Koffie k : jan) {
                                         if (upc.equals(k.getUPC())) {
                                             String kwartaalEenZeven = sheet.getCell(2, beginExtractJL).getContents();
 
@@ -750,7 +766,7 @@ public class ExcelExtract {
                                                         k.setDrieKwartaalAcht(kwartaalDrieAcht);
                                                         k.setVierKwartaalAcht(kwartaalVierAcht);
                                                         k.setSuperMarkt(superMarktJL);
-                                                        System.out.println(k.getUPC() + " " + kwartaalEenZeven + " " + kwartaalTweeZeven + " " + kwartaalDrieZeven + " " + kwartaalVierZeven + " " + kwartaalEenAcht + " " + kwartaalTweeAcht + " " + kwartaalDrieAcht + " " + kwartaalVierAcht);
+                                                        System.out.println(superMarktJL + " " + k.getUPC() + " " + kwartaalEenZeven + " " + kwartaalTweeZeven + " " + kwartaalDrieZeven + " " + kwartaalVierZeven + " " + kwartaalEenAcht + " " + kwartaalTweeAcht + " " + kwartaalDrieAcht + " " + kwartaalVierAcht);
                                                         break outerloop;
                                                     }
                                                 }
@@ -771,7 +787,7 @@ public class ExcelExtract {
                                                 k.setDrieKwartaalAcht(kwartaalDrieAcht);
                                                 k.setVierKwartaalAcht(kwartaalVierAcht);
                                                 k.setSuperMarkt(superMarktJL);
-                                                System.out.println(k.getUPC() + " " + kwartaalEenZeven + " " + kwartaalTweeZeven + " " + kwartaalDrieZeven + " " + kwartaalVierZeven + " " + kwartaalEenAcht + " " + kwartaalTweeAcht + " " + kwartaalDrieAcht + " " + kwartaalVierAcht);
+                                                System.out.println(superMarktJL + " " + k.getUPC() + " " + kwartaalEenZeven + " " + kwartaalTweeZeven + " " + kwartaalDrieZeven + " " + kwartaalVierZeven + " " + kwartaalEenAcht + " " + kwartaalTweeAcht + " " + kwartaalDrieAcht + " " + kwartaalVierAcht);
 
                                             }
                                         }
@@ -780,9 +796,9 @@ public class ExcelExtract {
                                 beginExtractJL++;
                             }
                             break;
-                        case "Deen":
-                        int beginExtractDE = sheet.findCell("Deen").getRow();
-                        int eindDE = sheet.findCell("Bonimarkt").getRow() - 2;
+                        case " Deen":
+                        int beginExtractDE = sheet.findCell(" Deen").getRow();
+                        int eindDE = sheet.findCell(" Bonimarkt").getRow() - 2;
                         String superMarktDE = "Deen";
 
                             while (beginExtractDE < eindDE) {
@@ -795,7 +811,7 @@ public class ExcelExtract {
                                         upc = matcher.group(1);
                                     }
 
-                                    for (Koffie k : superMarkten) {
+                                    for (Koffie k : deen) {
                                         if (upc.equals(k.getUPC())) {
                                             String kwartaalEenZeven = sheet.getCell(2, beginExtractDE).getContents();
 
@@ -822,7 +838,7 @@ public class ExcelExtract {
                                                         k.setDrieKwartaalAcht(kwartaalDrieAcht);
                                                         k.setVierKwartaalAcht(kwartaalVierAcht);
                                                         k.setSuperMarkt(superMarktDE);
-                                                        System.out.println(k.getUPC() + " " + kwartaalEenZeven + " " + kwartaalTweeZeven + " " + kwartaalDrieZeven + " " + kwartaalVierZeven + " " + kwartaalEenAcht + " " + kwartaalTweeAcht + " " + kwartaalDrieAcht + " " + kwartaalVierAcht);
+                                                        System.out.println(superMarktDE + " " + k.getUPC() + " " + kwartaalEenZeven + " " + kwartaalTweeZeven + " " + kwartaalDrieZeven + " " + kwartaalVierZeven + " " + kwartaalEenAcht + " " + kwartaalTweeAcht + " " + kwartaalDrieAcht + " " + kwartaalVierAcht);
                                                         break outerloop;
                                                     }
                                                 }
@@ -843,7 +859,7 @@ public class ExcelExtract {
                                                 k.setDrieKwartaalAcht(kwartaalDrieAcht);
                                                 k.setVierKwartaalAcht(kwartaalVierAcht);
                                                 k.setSuperMarkt(superMarktDE);
-                                                System.out.println(k.getUPC() + " " + kwartaalEenZeven + " " + kwartaalTweeZeven + " " + kwartaalDrieZeven + " " + kwartaalVierZeven + " " + kwartaalEenAcht + " " + kwartaalTweeAcht + " " + kwartaalDrieAcht + " " + kwartaalVierAcht);
+                                                System.out.println(superMarktDE + " " + k.getUPC() + " " + kwartaalEenZeven + " " + kwartaalTweeZeven + " " + kwartaalDrieZeven + " " + kwartaalVierZeven + " " + kwartaalEenAcht + " " + kwartaalTweeAcht + " " + kwartaalDrieAcht + " " + kwartaalVierAcht);
 
                                             }
                                         }
@@ -852,9 +868,9 @@ public class ExcelExtract {
                                 beginExtractDE++;
                             }
                             break;
-                        case "Bonimarkt":
-                        int beginExtractBM = sheet.findCell("Bonimarkt").getRow();
-                        int eindBM = sheet.findCell("Plus").getRow() - 2;
+                        case " Bonimarkt":
+                        int beginExtractBM = sheet.findCell(" Bonimarkt").getRow();
+                        int eindBM = sheet.findCell(" Plus").getRow() - 2;
                         String superMarktBM = "Bonimarkt";
 
                             while (beginExtractBM < eindBM) {
@@ -867,7 +883,7 @@ public class ExcelExtract {
                                         upc = matcher.group(1);
                                     }
 
-                                    for (Koffie k : superMarkten) {
+                                    for (Koffie k : bonimarkt) {
                                         if (upc.equals(k.getUPC())) {
                                             String kwartaalEenZeven = sheet.getCell(2, beginExtractBM).getContents();
 
@@ -894,7 +910,7 @@ public class ExcelExtract {
                                                         k.setDrieKwartaalAcht(kwartaalDrieAcht);
                                                         k.setVierKwartaalAcht(kwartaalVierAcht);
                                                         k.setSuperMarkt(superMarktBM);
-                                                        System.out.println(k.getUPC() + " " + kwartaalEenZeven + " " + kwartaalTweeZeven + " " + kwartaalDrieZeven + " " + kwartaalVierZeven + " " + kwartaalEenAcht + " " + kwartaalTweeAcht + " " + kwartaalDrieAcht + " " + kwartaalVierAcht);
+                                                        System.out.println(superMarktBM + " " + k.getUPC() + " " + kwartaalEenZeven + " " + kwartaalTweeZeven + " " + kwartaalDrieZeven + " " + kwartaalVierZeven + " " + kwartaalEenAcht + " " + kwartaalTweeAcht + " " + kwartaalDrieAcht + " " + kwartaalVierAcht);
                                                         break outerloop;
                                                     }
                                                 }
@@ -915,7 +931,7 @@ public class ExcelExtract {
                                                 k.setDrieKwartaalAcht(kwartaalDrieAcht);
                                                 k.setVierKwartaalAcht(kwartaalVierAcht);
                                                 k.setSuperMarkt(superMarktBM);
-                                                System.out.println(k.getUPC() + " " + kwartaalEenZeven + " " + kwartaalTweeZeven + " " + kwartaalDrieZeven + " " + kwartaalVierZeven + " " + kwartaalEenAcht + " " + kwartaalTweeAcht + " " + kwartaalDrieAcht + " " + kwartaalVierAcht);
+                                                System.out.println(superMarktBM + " " + k.getUPC() + " " + kwartaalEenZeven + " " + kwartaalTweeZeven + " " + kwartaalDrieZeven + " " + kwartaalVierZeven + " " + kwartaalEenAcht + " " + kwartaalTweeAcht + " " + kwartaalDrieAcht + " " + kwartaalVierAcht);
 
                                             }
                                         }
@@ -924,8 +940,8 @@ public class ExcelExtract {
                                 beginExtractBM++;
                             }
                             break;
-                        case "Plus":
-                        int beginExtractPL = sheet.findCell("Plus").getRow();
+                        case " Plus":
+                        int beginExtractPL = sheet.findCell(" Plus").getRow();
                         int eindPL = sheet.getRows();;
                         String superMarktPL = "Plus";
 
@@ -939,8 +955,8 @@ public class ExcelExtract {
                                         upc = matcher.group(1);
                                     }
 
-                                    for (Koffie k : superMarkten) {
-                                        if (upc.equals(k.getUPC())) {
+                                    for (Koffie a : plus) {
+                                        if (upc.equals(a.getUPC())) {
                                             String kwartaalEenZeven = sheet.getCell(2, beginExtractPL).getContents();
 
                                             if (kwartaalEenZeven.isEmpty()) {
@@ -957,16 +973,16 @@ public class ExcelExtract {
                                                         String kwartaalTweeAcht = sheet.getCell(6, beginExtractPL - i).getContents();
                                                         String kwartaalDrieAcht = sheet.getCell(7, beginExtractPL - i).getContents();
                                                         String kwartaalVierAcht = sheet.getCell(8, beginExtractPL - i).getContents();
-                                                        k.setEenKwartaalZeven(kwartaalEenZeven);
-                                                        k.setTweeKwartaalZeven(kwartaalTweeZeven);
-                                                        k.setDrieKwartaalZeven(kwartaalDrieZeven);
-                                                        k.setVierKwartaalZeven(kwartaalVierZeven);
-                                                        k.setEenKwartaalAcht(kwartaalEenAcht);
-                                                        k.setTweeKwartaalAcht(kwartaalTweeAcht);
-                                                        k.setDrieKwartaalAcht(kwartaalDrieAcht);
-                                                        k.setVierKwartaalAcht(kwartaalVierAcht);
-                                                        k.setSuperMarkt(superMarktPL);
-                                                        System.out.println(k.getUPC() + " " + kwartaalEenZeven + " " + kwartaalTweeZeven + " " + kwartaalDrieZeven + " " + kwartaalVierZeven + " " + kwartaalEenAcht + " " + kwartaalTweeAcht + " " + kwartaalDrieAcht + " " + kwartaalVierAcht);
+                                                        a.setEenKwartaalZeven(kwartaalEenZeven);
+                                                        a.setTweeKwartaalZeven(kwartaalTweeZeven);
+                                                        a.setDrieKwartaalZeven(kwartaalDrieZeven);
+                                                        a.setVierKwartaalZeven(kwartaalVierZeven);
+                                                        a.setEenKwartaalAcht(kwartaalEenAcht);
+                                                        a.setTweeKwartaalAcht(kwartaalTweeAcht);
+                                                        a.setDrieKwartaalAcht(kwartaalDrieAcht);
+                                                        a.setVierKwartaalAcht(kwartaalVierAcht);
+                                                        a.setSuperMarkt("henk");
+                                                        System.out.println(superMarktPL + " " + a.getUPC() + " " + kwartaalEenZeven + " " + kwartaalTweeZeven + " " + kwartaalDrieZeven + " " + kwartaalVierZeven + " " + kwartaalEenAcht + " " + kwartaalTweeAcht + " " + kwartaalDrieAcht + " " + kwartaalVierAcht);
                                                         break outerloop;
                                                     }
                                                 }
@@ -978,16 +994,16 @@ public class ExcelExtract {
                                                 String kwartaalTweeAcht = sheet.getCell(6, beginExtractPL).getContents();
                                                 String kwartaalDrieAcht = sheet.getCell(7, beginExtractPL).getContents();
                                                 String kwartaalVierAcht = sheet.getCell(8, beginExtractPL).getContents();
-                                                k.setEenKwartaalZeven(kwartaalEenZeven);
-                                                k.setTweeKwartaalZeven(kwartaalTweeZeven);
-                                                k.setDrieKwartaalZeven(kwartaalDrieZeven);
-                                                k.setVierKwartaalZeven(kwartaalVierZeven);
-                                                k.setEenKwartaalAcht(kwartaalEenAcht);
-                                                k.setTweeKwartaalAcht(kwartaalTweeAcht);
-                                                k.setDrieKwartaalAcht(kwartaalDrieAcht);
-                                                k.setVierKwartaalAcht(kwartaalVierAcht);
-                                                k.setSuperMarkt(superMarktPL);
-                                                System.out.println(k.getUPC() + " " + kwartaalEenZeven + " " + kwartaalTweeZeven + " " + kwartaalDrieZeven + " " + kwartaalVierZeven + " " + kwartaalEenAcht + " " + kwartaalTweeAcht + " " + kwartaalDrieAcht + " " + kwartaalVierAcht);
+                                                a.setEenKwartaalZeven(kwartaalEenZeven);
+                                                a.setTweeKwartaalZeven(kwartaalTweeZeven);
+                                                a.setDrieKwartaalZeven(kwartaalDrieZeven);
+                                                a.setVierKwartaalZeven(kwartaalVierZeven);
+                                                a.setEenKwartaalAcht(kwartaalEenAcht);
+                                                a.setTweeKwartaalAcht(kwartaalTweeAcht);
+                                                a.setDrieKwartaalAcht(kwartaalDrieAcht);
+                                                a.setVierKwartaalAcht(kwartaalVierAcht);
+                                                a.setSuperMarkt("henk");
+                                                System.out.println(superMarktPL + " " + a.getUPC() + " " + kwartaalEenZeven + " " + kwartaalTweeZeven + " " + kwartaalDrieZeven + " " + kwartaalVierZeven + " " + kwartaalEenAcht + " " + kwartaalTweeAcht + " " + kwartaalDrieAcht + " " + kwartaalVierAcht);
 
                                             }
                                         }
@@ -997,9 +1013,24 @@ public class ExcelExtract {
                             }
                             break;
                     }
+                begin++;
             }
-                
+            superMarkten.addAll(plus);
+        superMarkten.addAll(albert);
+        superMarkten.addAll(superboer);
+        superMarkten.addAll(c1000);
+        superMarkten.addAll(superunie);
+        superMarkten.addAll(coop);
+        superMarkten.addAll(hoogvliet);
+        superMarkten.addAll(jumbo);
+        superMarkten.addAll(vomar);
+        superMarkten.addAll(jan);
+        superMarkten.addAll(deen);
+        superMarkten.addAll(bonimarkt);
+        
+        System.out.println(superMarkten);
             }
+        
         catch (IOException | BiffException ex) {
             Logger.getLogger(ExcelExtract.class.getName()).log(Level.SEVERE, null, ex);
         }

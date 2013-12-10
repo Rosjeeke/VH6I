@@ -52,8 +52,8 @@ public class MainFrame extends JFrame{
 //					MainFrame frame = new MainFrame();
 //					frame.setVisible(true);
                                         ExcelExtract transform = new ExcelExtract();
-                                        transform.extractSwitch(System.getProperty("user.home") + "\\Dropbox\\DVP6IB2 - junior BI-consultant\\Opdracht 6 BCG Matrix\\datadump.xls", 3);
-//                                        transform.superMarktRead(System.getProperty("user.home") + "\\Dropbox\\DVP6IB2 - junior BI-consultant\\Bronbestanden\\test3.xls", 2, 3187, "Albert Heijn");
+                                        transform.infoScanRead(System.getProperty("user.home") + "\\Dropbox\\DVP6IB2 - junior BI-consultant\\Opdracht 6 BCG Matrix\\datadump1.xls", 3);
+                                        transform.extractSwitch(System.getProperty("user.home") + "\\Dropbox\\DVP6IB2 - junior BI-consultant\\Opdracht 6 BCG Matrix\\datadump1.xls", 2);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
