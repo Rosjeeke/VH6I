@@ -51,11 +51,11 @@ public class ExcelExtract {
 //                        System.out.println("Major brand: " + brand);
                         break;
                     case "APPARAAT":
-                        apparaat = string.getContents().replace(brand, "").trim();
+                        setApparaat(string.getContents().replace(brand, "").trim());
 //                        System.out.println("Apparaat: " + apparaat);
                         break;
                     case "TYPE":
-                        vorige1 = brand + " " + apparaat;
+                        vorige1 = brand + " " + getApparaat();
                         type = string.getContents().replace(vorige1, "").trim();
 //                        System.out.println("Type: " + type);
                         break;
@@ -75,8 +75,8 @@ public class ExcelExtract {
 //                        System.out.println("Formaat: " + formaat);
                         break;
                     case "SMAAK":
-                        vorige5 = brand + " " + apparaat + " " + type + " " + soort + " " + formaat;
-                        smaak = string.getContents().replace(vorige5, "").trim();
+                        setVorige5(brand + " " + getApparaat() + " " + type + " " + soort + " " + formaat);
+                        smaak = string.getContents().replace(getVorige5(), "").trim();
 //                        System.out.println("Smaak: " + smaak);
                         break;
                     case "UPC":
@@ -88,9 +88,9 @@ public class ExcelExtract {
                         }
 
 //                        System.out.println("UPC: " + upc);
-                        Koffie kf = new Koffie(brand, apparaat, type, beleving, soort, formaat, smaak, upc, "", "", "", "", "", "", "", "", "");
+                        Koffie kf = new Koffie(brand, getApparaat(), type, beleving, soort, formaat, smaak, upc, "", "", "", "", "", "", "", "", "");
 
-                        koffie.add(kf);
+                        getKoffie().add(kf);
 
                         break;
                 }
@@ -112,57 +112,57 @@ public class ExcelExtract {
                 switch ((code.getContents()).toString()) {
                     case "Albert Heijn":
                         albert = new ArrayList<>();
-                        begin = readSales(bestand, "Albert Heijn", " Super de Boer", sheet, albert);
+                        begin = readSales(bestand, "Albert Heijn", " Super de Boer", sheet, getAlbert());
                         break;
                     case " Super de Boer":
                         superboer = new ArrayList<>();
-                        begin = readSales(bestand, " Super de Boer", "C1000", sheet, superboer);
+                        begin = readSales(bestand, " Super de Boer", "C1000", sheet, getSuperboer());
                         break;
                     case "C1000":
                         c1000 = new ArrayList<>();
-                        begin = readSales(bestand, "C1000", "Superunie", sheet, c1000);
+                        begin = readSales(bestand, "C1000", "Superunie", sheet, getC1000());
                         break;
                     case "Superunie":
                         superunie = new ArrayList<>();
-                        begin = readSales(bestand, "Superunie", " COOP Totaal", sheet, superunie);
+                        begin = readSales(bestand, "Superunie", " COOP Totaal", sheet, getSuperunie());
                         break;
                     case " COOP Totaal":
                         coop = new ArrayList<>();
-                        begin = readSales(bestand, " COOP Totaal", " Hoogvliet", sheet, coop);
+                        begin = readSales(bestand, " COOP Totaal", " Hoogvliet", sheet, getCoop());
                         break;
                     case " Hoogvliet":
                         hoogvliet = new ArrayList<>();
-                        begin = readSales(bestand, " Hoogvliet", " Jumbo", sheet, hoogvliet);
+                        begin = readSales(bestand, " Hoogvliet", " Jumbo", sheet, getHoogvliet());
                         break;
                     case " Jumbo":
                         jumbo = new ArrayList<>();
-                        begin = readSales(bestand, " Jumbo", " Vomar", sheet, jumbo);
+                        begin = readSales(bestand, " Jumbo", " Vomar", sheet, getJumbo());
                         break;
                     case " Vomar":
                         vomar = new ArrayList<>();
-                        begin = readSales(bestand, " Vomar", " Jan Linders", sheet, vomar);
+                        begin = readSales(bestand, " Vomar", " Jan Linders", sheet, getVomar());
                         break;
                     case " Jan Linders":
                         jan = new ArrayList<>();
-                        begin = readSales(bestand, " Jan Linders", " Deen", sheet, jan);
+                        begin = readSales(bestand, " Jan Linders", " Deen", sheet, getJan());
                         break;
                     case " Deen":
                         deen = new ArrayList<>();
-                        begin = readSales(bestand, " Deen", " Bonimarkt", sheet, deen);
+                        begin = readSales(bestand, " Deen", " Bonimarkt", sheet, getDeen());
                         break;
                     case " Bonimarkt":
                         bonimarkt = new ArrayList<>();
-                        begin = readSales(bestand, " Bonimarkt", " Plus", sheet, bonimarkt);
+                        begin = readSales(bestand, " Bonimarkt", " Plus", sheet, getBonimarkt());
                         break;
                     case " Plus":
                         int beginPL = sheet.findCell(" Plus").getRow();
                         int eindPL = sheet.getRows();
                         plus = new ArrayList<Koffie>();
-                        for(Koffie k : koffie){
-                            plus.add(k.getNewCopy(k.getMajorBrand(), k.getApparaat(), k.getType(), k.getBeleving(), k.getSoort(),
+                        for(Koffie k : getKoffie()){
+                            getPlus().add(k.getNewCopy(k.getMajorBrand(), k.getApparaat(), k.getType(), k.getBeleving(), k.getSoort(),
                                     k.getFormaat(), k.getSmaak(), k.getUPC(), "","","","","","","","", k.getSuperMarkt()));
                         }
-                        superMarktRead(bestand, beginPL, eindPL, "Plus", sheet, plus);
+                        superMarktRead(bestand, beginPL, eindPL, "Plus", sheet, getPlus());
                         begin = eindPL;
                         break;
                 }
@@ -177,7 +177,7 @@ public class ExcelExtract {
     public int readSales(String bestand, String beginSupermarkt, String eindSupermarkt,Sheet sheet, ArrayList<Koffie> supermarktLijst){
         int begin = sheet.findCell(beginSupermarkt).getRow();
         int eind = sheet.findCell(eindSupermarkt).getRow() - 1;
-        for(Koffie k : koffie){
+        for(Koffie k : getKoffie()){
             supermarktLijst.add(k.getNewCopy(k.getMajorBrand(), k.getApparaat(), k.getType(), k.getBeleving(), k.getSoort(),
                     k.getFormaat(), k.getSmaak(), k.getUPC(), "","","","","","","","", k.getSuperMarkt()));
         }
@@ -208,14 +208,14 @@ public class ExcelExtract {
 
                                 kwartaalEenZeven = sheet.getCell(2, beginSupermarkt - i).getContents();
                                 if (kwartaalEenZeven.isEmpty() == false) {
-                                    kwartaalEenZeven = sheet.getCell(1, beginSupermarkt - i).getContents();
-                                    String kwartaalTweeZeven = sheet.getCell(2, beginSupermarkt - i).getContents();
-                                    String kwartaalDrieZeven = sheet.getCell(3, beginSupermarkt - i).getContents();
-                                    String kwartaalVierZeven = sheet.getCell(4, beginSupermarkt - i).getContents();
-                                    String kwartaalEenAcht = sheet.getCell(5, beginSupermarkt - i).getContents();
-                                    String kwartaalTweeAcht = sheet.getCell(6, beginSupermarkt - i).getContents();
-                                    String kwartaalDrieAcht = sheet.getCell(7, beginSupermarkt - i).getContents();
-                                    String kwartaalVierAcht = sheet.getCell(8, beginSupermarkt - i).getContents();
+                                    kwartaalEenZeven = sheet.getCell(2, beginSupermarkt - i).getContents();
+                                    String kwartaalTweeZeven = sheet.getCell(3, beginSupermarkt - i).getContents();
+                                    String kwartaalDrieZeven = sheet.getCell(4, beginSupermarkt - i).getContents();
+                                    String kwartaalVierZeven = sheet.getCell(5, beginSupermarkt - i).getContents();
+                                    String kwartaalEenAcht = sheet.getCell(6, beginSupermarkt - i).getContents();
+                                    String kwartaalTweeAcht = sheet.getCell(7, beginSupermarkt - i).getContents();
+                                    String kwartaalDrieAcht = sheet.getCell(8, beginSupermarkt - i).getContents();
+                                    String kwartaalVierAcht = sheet.getCell(9, beginSupermarkt - i).getContents();
                                     a.setEenKwartaalZeven(kwartaalEenZeven);
                                     a.setTweeKwartaalZeven(kwartaalTweeZeven);
                                     a.setDrieKwartaalZeven(kwartaalDrieZeven);
@@ -230,14 +230,14 @@ public class ExcelExtract {
                                 }
                             }
                         } else {
-                            kwartaalEenZeven = sheet.getCell(1, beginSupermarkt).getContents();
-                            String kwartaalTweeZeven = sheet.getCell(2, beginSupermarkt).getContents();
-                            String kwartaalDrieZeven = sheet.getCell(3, beginSupermarkt).getContents();
-                            String kwartaalVierZeven = sheet.getCell(4, beginSupermarkt).getContents();
-                            String kwartaalEenAcht = sheet.getCell(5, beginSupermarkt).getContents();
-                            String kwartaalTweeAcht = sheet.getCell(6, beginSupermarkt).getContents();
-                            String kwartaalDrieAcht = sheet.getCell(7, beginSupermarkt).getContents();
-                            String kwartaalVierAcht = sheet.getCell(8, beginSupermarkt).getContents();
+                            kwartaalEenZeven = sheet.getCell(2, beginSupermarkt).getContents();
+                            String kwartaalTweeZeven = sheet.getCell(3, beginSupermarkt).getContents();
+                            String kwartaalDrieZeven = sheet.getCell(4, beginSupermarkt).getContents();
+                            String kwartaalVierZeven = sheet.getCell(5, beginSupermarkt).getContents();
+                            String kwartaalEenAcht = sheet.getCell(6, beginSupermarkt).getContents();
+                            String kwartaalTweeAcht = sheet.getCell(7, beginSupermarkt).getContents();
+                            String kwartaalDrieAcht = sheet.getCell(8, beginSupermarkt).getContents();
+                            String kwartaalVierAcht = sheet.getCell(9, beginSupermarkt).getContents();
                             a.setEenKwartaalZeven(kwartaalEenZeven);
                             a.setTweeKwartaalZeven(kwartaalTweeZeven);
                             a.setDrieKwartaalZeven(kwartaalDrieZeven);
@@ -256,5 +256,73 @@ public class ExcelExtract {
             beginSupermarkt++;
         }
         System.out.println(superMarkt);
+    }
+
+    public ArrayList<Koffie> getAlbert() {
+        return albert;
+    }
+
+    public ArrayList<Koffie> getSuperboer() {
+        return superboer;
+    }
+
+    public ArrayList<Koffie> getC1000() {
+        return c1000;
+    }
+
+    public ArrayList<Koffie> getSuperunie() {
+        return superunie;
+    }
+
+    public ArrayList<Koffie> getCoop() {
+        return coop;
+    }
+
+    public ArrayList<Koffie> getHoogvliet() {
+        return hoogvliet;
+    }
+
+    public ArrayList<Koffie> getJumbo() {
+        return jumbo;
+    }
+
+    public ArrayList<Koffie> getVomar() {
+        return vomar;
+    }
+
+    public ArrayList<Koffie> getJan() {
+        return jan;
+    }
+
+    public ArrayList<Koffie> getDeen() {
+        return deen;
+    }
+
+    public ArrayList<Koffie> getBonimarkt() {
+        return bonimarkt;
+    }
+
+    public ArrayList<Koffie> getPlus() {
+        return plus;
+    }
+
+    public String getApparaat() {
+        return apparaat;
+    }
+
+    public void setApparaat(String apparaat) {
+        this.apparaat = apparaat;
+    }
+
+    public ArrayList<Koffie> getKoffie() {
+        return koffie;
+    }
+
+    public String getVorige5() {
+        return vorige5;
+    }
+
+    public void setVorige5(String vorige5) {
+        this.vorige5 = vorige5;
     }
 }

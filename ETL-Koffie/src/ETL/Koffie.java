@@ -174,6 +174,34 @@ public class Koffie {
         this.superMarkt = superMarkt;
     }
 
+    public String getTweeKwartaalZeven() {
+        return tweeKwartaalZeven;
+    }
+
+    public String getDrieKwartaalZeven() {
+        return drieKwartaalZeven;
+    }
+
+    public String getVierKwartaalZeven() {
+        return vierKwartaalZeven;
+    }
+
+    public String getEenKwartaalAcht() {
+        return eenKwartaalAcht;
+    }
+
+    public String getTweeKwartaalAcht() {
+        return tweeKwartaalAcht;
+    }
+
+    public String getDrieKwartaalAcht() {
+        return drieKwartaalAcht;
+    }
+
+    public String getVierKwartaalAcht() {
+        return vierKwartaalAcht;
+    }
+
     
     
 }
