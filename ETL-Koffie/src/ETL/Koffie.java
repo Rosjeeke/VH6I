@@ -44,7 +44,29 @@ public class Koffie {
         this.vierKwartaalAcht = vierKwartaalAcht;
         this.superMarkt = superMarkt;
     }
-
+    public Koffie getNewCopy(String majorBrand, String apparaat, String type, String beleving, String soort,
+            String formaat, String smaak, String uPC, String eenKwartaalZeven, String tweeKwartaalZeven,
+            String drieKwartaalZeven, String vierKwartaalZeven, String eenKwartaalAcht, String tweeKwartaalAcht, String drieKwartaalAcht, String vierKwartaalAcht, String superMarkt){ 
+    Koffie k = new Koffie(majorBrand, apparaat, type, beleving, soort, formaat, smaak, uPC, eenKwartaalZeven, tweeKwartaalZeven
+            , drieKwartaalZeven, vierKwartaalZeven, eenKwartaalAcht, tweeKwartaalAcht, drieKwartaalAcht, vierKwartaalAcht, superMarkt);
+    k.majorBrand = majorBrand;
+    k.apparaat = apparaat;
+    k.type = type;
+    k.beleving = beleving;
+    k.soort = soort;
+    k.formaat = formaat;
+    k.smaak = smaak;
+    k.uPC = uPC;
+    k.eenKwartaalZeven = eenKwartaalZeven;
+    k.tweeKwartaalZeven = tweeKwartaalZeven;
+    k.drieKwartaalZeven = drieKwartaalZeven;
+    k.vierKwartaalZeven = vierKwartaalZeven;
+    k.eenKwartaalAcht = eenKwartaalAcht;
+    k.tweeKwartaalAcht = tweeKwartaalAcht;
+    k.drieKwartaalAcht = drieKwartaalAcht;
+    k.vierKwartaalAcht = vierKwartaalAcht;
+    return k;
+    }
     public String getMajorBrand() {
         return majorBrand;
     }
@@ -142,6 +164,10 @@ public class Koffie {
 
     public void setVierKwartaalAcht(String vierKwartaalAcht) {
         this.vierKwartaalAcht = vierKwartaalAcht;
+    }
+    
+    public String getSuperMarkt(){
+        return superMarkt;
     }
     
     public void setSuperMarkt(String superMarkt){

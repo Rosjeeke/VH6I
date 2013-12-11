@@ -6,7 +6,6 @@ package ETL.GUI;
 
 import ETL.ExcelExtract;
 import Rommel.Klant;
-import Rommel.Extract;
 import Rommel.Transform;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
@@ -118,8 +117,8 @@ public class MainFrame extends JFrame{
 		JButton btnExtract = new JButton("Extract");
 		btnExtract.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				Extract extract = new Extract(file, mf, path);
-                                klanten = extract.getKlanten();
+//				Extract extract = new Extract(file, mf, path);
+//                                klanten = extract.getKlanten();
 			}
 		});
 		btnExtract.setBounds(160, 70, 80, 20);
