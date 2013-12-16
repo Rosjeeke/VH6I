@@ -33,8 +33,8 @@ public class Main {
         CSVExtractor csv2 = new CSVExtractor();
         
         //een klant toevoegen
-        access1.extractor(System.getProperty("user.home") + "\\Dropbox\\DVP6IB2 - junior BI-consultant\\Bronbestanden\\Klant2\\c1a.mdb");
-        access2.extractor(System.getProperty("user.home") + "\\Dropbox\\DVP6IB2 - junior BI-consultant\\Bronbestanden\\Klant2\\c1b.mdb");
+        //access1.extractor(System.getProperty("user.home") + "\\Dropbox\\DVP6IB2 - junior BI-consultant\\Bronbestanden\\Klant2\\c1a.mdb");
+        //access2.extractor(System.getProperty("user.home") + "\\Dropbox\\DVP6IB2 - junior BI-consultant\\Bronbestanden\\Klant2\\c1b.mdb");
         excel1.read(System.getProperty("user.home") + "\\Dropbox\\DVP6IB2 - junior BI-consultant\\Bronbestanden\\Klant2\\c2a.xls");
         excel2.read(System.getProperty("user.home") + "\\Dropbox\\DVP6IB2 - junior BI-consultant\\Bronbestanden\\Klant2\\c2b.xls");
         csv1.csvExtract(("user.home") + "\\Dropbox\\DVP6IB2 - junior BI-consultant\\Bronbestanden\\Klant2\\c3a.txt");
@@ -57,15 +57,15 @@ public class Main {
         ArrayList<Klant> klanten = new ArrayList<Klant>();
         ArrayList<Klant> klantenexcel1 = excel1.getKlanten();
         ArrayList<Klant> klantenexcel2 = excel2.getKlanten();
-        ArrayList<Klant> klantenaccess1 = access1.getKlanten();
-        ArrayList<Klant> klantenaccess2 = access2.getKlanten();
+        //ArrayList<Klant> klantenaccess1 = access1.getKlanten();
+        //ArrayList<Klant> klantenaccess2 = access2.getKlanten();
         ArrayList<Klant> klantencsv1 = csv1.getKlanten();
         ArrayList<Klant> klantencsv2 = csv2.getKlanten();
         
         klanten.addAll(klantenexcel1);
         klanten.addAll(klantenexcel2);
-        klanten.addAll(klantenaccess1);
-        klanten.addAll(klantenaccess2);
+        //klanten.addAll(klantenaccess1);
+        //klanten.addAll(klantenaccess2);
         klanten.addAll(klantencsv1);
         klanten.addAll(klantencsv2);
         
