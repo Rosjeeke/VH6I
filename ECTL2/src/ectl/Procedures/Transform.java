@@ -17,12 +17,12 @@ public class Transform {
 
     ArrayList<Klant> klanten;
 
-    public Transform() {
-        klanten = new ArrayList<>();
-        klanten.add(new Klant(1, "R.Welten", "0162683112", "0627232007", "Made", "PO", new BigDecimal("0.15")));
+    public Transform(ArrayList<Klant> klanten) {
+        this.klanten = klanten;
+        //klanten.add(new Klant(1, "R.Welten", "0162683112", "0627232007", "Made", "PO", new BigDecimal("0.15")));
     }
 
-    public void Transform() {
+    public void Transformer() {
 
         for (Klant k : klanten) {
             BigDecimal percentage = k.getPercentage();
@@ -97,5 +97,9 @@ public class Transform {
                 System.out.println(k.getKlantNaam());
             } 
         }
+    }
+    
+    public ArrayList<Klant> getKlanten(){
+        return klanten;
     }
 }
