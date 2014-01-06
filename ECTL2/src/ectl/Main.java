@@ -24,16 +24,15 @@ public class Main {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         //Aanmaken nieuwe Database met de naam van de databank 
         MysqlDatabase db1 = new MysqlDatabase("myseconddwh");
         
         //date
-        Date datum = new Date();
-        SimpleDateFormat tijd = new SimpleDateFormat("HH:mm:ss");
-        SimpleDateFormat dag = new SimpleDateFormat("y-M-d");
-        String td = tijd.format(datum);
-        String dg = dag.format(datum);
+        //Date datum = new Date();
+        //SimpleDateFormat tijd = new SimpleDateFormat("HH:mm:ss");
+        //SimpleDateFormat dag = new SimpleDateFormat("y-M-d");
+        
         
         
         
@@ -85,9 +84,7 @@ public class Main {
         Transform tf = new Transform(klanten);
         tf.Transformer();
         klanten = tf.getKlanten();
-        
-        Set<Klant> clean = new HashSet<Klant>(klanten);
-        klanten = clean.toArray<Klant>();
+        int teller = 0;
         
         for(Klant k : klanten){
             
@@ -96,6 +93,11 @@ public class Main {
             //    String out = k.getKlantNummer()+" "+k.getKlantNaam()+" "+k.getTelefoon()+" "+k.getMobiel()+" "+k.getPlaats()+" "+k.getLand()+" "+k.getPercentage().toString();
             //    System.out.println(out);    
             //}
+            Date datum = new Date();
+            SimpleDateFormat tijd = new SimpleDateFormat("HH:mm:ss");
+            SimpleDateFormat dag = new SimpleDateFormat("y-M-d");
+            String td = tijd.format(datum);
+            String dg = dag.format(datum);
             
             if(i<1){
                 query = "INSERT INTO klant VALUES ('"+k.getKlantNummer()+"', '"+k.getKlantNaam()+"', '"+k.getTelefoon()+"', '"+k.getMobiel()+"', '"+k.getPlaats()+"', '"+k.getLand()+"', '"+k.getPercentage()+"', '"+dg+"', '"+td+"')";
@@ -103,11 +105,20 @@ public class Main {
             //db1.sqlUpdate(test);
             i++;}
             else{
+                Thread.sleep(50);
+                datum = new Date();
+                tijd = new SimpleDateFormat("HH:mm:ss");
+                dag = new SimpleDateFormat("y-M-d");
+                td = tijd.format(datum);
+                dg = dag.format(datum);
+                System.out.println(teller);
+                teller++;
+                //System.out.println(td2);
                 query += ",('"+k.getKlantNummer()+"', '"+k.getKlantNaam()+"', '"+k.getTelefoon()+"', '"+k.getMobiel()+"', '"+k.getPlaats()+"', '"+k.getLand()+"', '"+k.getPercentage()+"', '"+dg+"', '"+td+"') ";
             }
         }query = query + ";";
         //System.out.println(query);
-        //db1.sqlUpdate(query);
+        db1.sqlUpdate(query);
 //        db1.sqlUpdate("INSERT INTO klant VALUES('1' , 'J. van Drunen' , '0162686655', '0628956325', 'Made', 'NL', '5' )");
 //        //De gegevens in de database uitprinten
 
