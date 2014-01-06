@@ -41,7 +41,8 @@ public class ExcelExtract {
                 Cell plaats = sheet.getCell(3, rij);
                 Cell land = sheet.getCell(4, rij);
                 Cell percentage = sheet.getCell(5, rij);
-                BigDecimal percentageInt = new BigDecimal(percentage.getContents());
+                String perc = percentage.getContents();
+                BigDecimal percentageInt = new BigDecimal(perc.replace(",", "."));
                         //Integer.parseInt(percentage.getContents());
                 
                 Klant nieuw = new Klant(nrInt, naam.getContents(), telefoon.getContents(), "", plaats.getContents(), land.getContents(), percentageInt);

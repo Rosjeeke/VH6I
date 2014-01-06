@@ -62,7 +62,7 @@ public class Transform {
                     String naam2 = naam.substring(naam.indexOf('.') + 1);
                     if (naam1.length() == 1 && !k.getKlantNaam().contains(" en ")) {
                         k.setKlantNaam(naam1 + "." + naam2);
-                        System.out.println(k.getKlantNaam());
+                        //System.out.println(k.getKlantNaam());
                     }
                 }
             }
@@ -71,13 +71,13 @@ public class Transform {
                 String naam1 = naam.substring(0, naam.indexOf(','));
                 String naam2 = naam.substring(naam.indexOf(',') + 1);
                 k.setKlantNaam(naam2.replace(" ", "") + " " + naam1);
-                System.out.println(k.getKlantNaam());
+                //System.out.println(k.getKlantNaam());
             }
             
             if (k.getKlantNaam().contains(" en ")) {
                 String naamNieuw = k.getKlantNaam().replace(" en ", " - ");
                 k.setKlantNaam(naamNieuw);
-                System.out.println(k.getKlantNaam());
+                //System.out.println(k.getKlantNaam());
             }
 
             String[] tussenvoegsels = new String[]{" van de ", " van der ", " Van De ", " Van Der ", " van den ", " Van Den "};
@@ -94,8 +94,18 @@ public class Transform {
                 String naam2 = k.getKlantNaam().substring(k.getKlantNaam().indexOf(' ') + 1);
                 String naam3 = naam1.substring(0, 1);
                 k.setKlantNaam(naam3 + ". " + naam2);
-                System.out.println(k.getKlantNaam());
+                //System.out.println(k.getKlantNaam());
             } 
+            
+            if (k.getKlantNaam().contains(" 't ")) {
+                String naamNieuw = k.getKlantNaam().replace(" 't ", " het ");
+                k.setKlantNaam(naamNieuw);
+                //System.out.println(k.getKlantNaam());
+            }
+            
+            if("".equals(k.getMobiel())){
+                k.setMobiel("null");
+            }
         }
     }
     

@@ -27,14 +27,15 @@ public class AccessExtractor {
             Table table = db.getTable("Klant");
             for(Row row : table) 
             {
-                int klantNummer = (int)row.get("KlantId");
+                String klantnr = row.get("KlantId").toString();
+                int klantNummer = Integer.parseInt(klantnr);
                 String klantNaam = row.get("KlantNaam").toString();
                 String telefoon = row.get("Telefoon").toString();
                 String mobiel = row.get("Mobiel").toString();
                 String plaats = row.get("Plaats").toString();
                 String land = row.get("Land").toString();
-                BigDecimal percentage = new BigDecimal((String)row.get("Korting"));
-                
+                String perc = row.get("Korting").toString();
+                BigDecimal percentage = new BigDecimal(perc);
                 Klant nieuw = new Klant(klantNummer, klantNaam, telefoon, mobiel, plaats, land, percentage);
                 klanten.add(nieuw);
             }

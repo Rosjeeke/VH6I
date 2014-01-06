@@ -51,7 +51,7 @@ public class MainFrame extends JFrame{
 //					MainFrame frame = new MainFrame();
 //					frame.setVisible(true);
                                         Transform transform = new Transform();
-                                        transform.Transform();
+                                        transform.Transformer();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
