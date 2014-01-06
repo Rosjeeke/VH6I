@@ -8,48 +8,41 @@ import java.util.ArrayList;
  * @author Rogier
  */
 public class Main {
-    
-    private FixedWidthExtract fwe;
-    private ExtractA2 exce;
-    private AccessExtractor access;
-    
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        //Aanmaken nieuwe Database met de naam van de databank 
+        //Aanmaken nieuwe Database met de naam van de databank .
         MysqlDatabase db1 = new MysqlDatabase("myfirstdwh");
         
         //Aanmaken van de verschillende extract klassen.
-        FixedWidthExtract fwe = new FixedWidthExtract();
-        ExtractA2 exce = new ExtractA2();
-        AccessExtractor access = new AccessExtractor();
+        FixedWidthExtractor fwe = new FixedWidthExtractor();
+        ExcelExtractor exc = new ExcelExtractor();
+        AccessExtractor acc = new AccessExtractor();
         CSVExtractor csv = new CSVExtractor();
         
-        //een klant toevoegen
+        //Extracten van de bestanden.
         fwe.extract(System.getProperty("user.home") + "\\Dropbox\\DVP6IB2 - junior BI-consultant\\Bronbestanden\\Klant\\A4.txt");
-        exce.read(System.getProperty("user.home") + "\\Dropbox\\DVP6IB2 - junior BI-consultant\\Bronbestanden\\Klant\\A2.xls");
-        access.extractor(System.getProperty("user.home") + "\\Dropbox\\DVP6IB2 - junior BI-consultant\\Bronbestanden\\Klant\\A1.mdb");
-        csv.csvExtract(System.getProperty("user.home") + "\\Dropbox\\DVP6IB2 - junior BI-consultant\\Bronbestanden\\Klant\\A3.txt");
+        exc.extract(System.getProperty("user.home") + "\\Dropbox\\DVP6IB2 - junior BI-consultant\\Bronbestanden\\Klant\\A2.xls");
+        acc.extract(System.getProperty("user.home") + "\\Dropbox\\DVP6IB2 - junior BI-consultant\\Bronbestanden\\Klant\\A1.mdb");
+        csv.extract(System.getProperty("user.home") + "\\Dropbox\\DVP6IB2 - junior BI-consultant\\Bronbestanden\\Klant\\A3.txt");
         
-//        Klant k1 = new Klant(1, "J. van drunen", "0162684569", "062584759631", "Made", "NL", 6);
-//        Klant k2 = new Klant(2, "J. van drunen", "0162684569", "062584759631", "Made", "NL", 15);
-//        fweklanten.add(k1);
-//        fweklanten.add(k2);
+        //Ophalen van de extracte gegevens.
+        ArrayList<Klant> klantenfwe = fwe.getKlanten();
+        ArrayList<Klant> klantenexc = exc.getKlanten();
+        ArrayList<Klant> klantenacc = acc.getKlanten();
+        ArrayList<Klant> klantencsv = csv.getKlanten();
+         
+        //Alle extracte gegevens in een algemene arraylist stoppen.
+        ArrayList<Klant> klanten = new ArrayList<Klant>();
+        klanten.addAll(klantenfwe);
+        klanten.addAll(klantenexc);
+        klanten.addAll(klantenacc);
+        klanten.addAll(klantencsv);
         
+        //Gegevens in een grote query stoppen voor in de database.
         int i = 0;
         String query = "";
-        
-        ArrayList<Klant> klanten = new ArrayList<Klant>();
-        ArrayList<Klant> klantenfwe = fwe.getKlanten();
-        ArrayList<Klant> klantenexce = exce.getKlanten();
-        ArrayList<Klant> klantenaccess = access.getKlanten();
-        ArrayList<Klant> klantencsv = csv.getKlanten();
-        
-        klanten.addAll(klantenfwe);
-        klanten.addAll(klantenexce);
-        klanten.addAll(klantenaccess);
-        klanten.addAll(klantencsv);
         
         for(Klant k : klanten){
             
@@ -61,16 +54,17 @@ public class Main {
                 query += ",(\""+k.getKlantNummer()+"\", \""+k.getKlantNaam()+"\", \""+k.getTelefoon()+"\"," + " \""+k.getMobiel()+"\", \""+k.getPlaats()+"\", \""+k.getLand()+"\", \""+k.getPercentage()+"\" )";
             }
         }
+        query = query + ";";
         db1.sqlUpdate(query);
-//        db1.sqlUpdate("INSERT INTO klant VALUES('1' , 'J. van Drunen' , '0162686655', '0628956325', 'Made', 'NL', '5' )");
-//        //De gegevens in de database uitprinten
-
-//        db1.sqlExecute("SELECT * FROM klant");
-//        // De gegevens in de database verwijderen
-//        db1.sqlUpdate("DELETE FROM klant WHERE KlantNummer = '1'");
 
         //Sluiten van de verbinding
-        db1.Sluitconnectie();
+        boolean y = false;
+        y = db1.Sluitconnectie();
+        if (y) {
+            System.out.println("Database verbinding gesloten!");
+        } else {
+            System.out.println("Database verbinding niet gesloten!");
+        }
         
     }
 }

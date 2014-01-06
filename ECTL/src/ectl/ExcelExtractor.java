@@ -18,14 +18,14 @@ import jxl.read.biff.BiffException;
  *
  * @author Liannie
  */
-public class ExtractA2 {
+public class ExcelExtractor {
     private ArrayList<Klant> klanten;
     
-    public ExtractA2(){
+    public ExcelExtractor(){
         klanten = new ArrayList<Klant>();
     }
        
-    public void read(String bestand){
+    public void extract(String bestand){
         try {
             Workbook workbook = Workbook.getWorkbook(new File(bestand));
             Sheet sheet = workbook.getSheet(0);
@@ -50,7 +50,7 @@ public class ExtractA2 {
             }
             
         } catch (IOException | BiffException ex) {
-            Logger.getLogger(ExtractA2.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ExcelExtractor.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         

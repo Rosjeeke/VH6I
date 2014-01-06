@@ -84,7 +84,8 @@ public class Main {
                 dg = dag.format(datum);
                 query += ",('"+k.getKlantNummer()+"', '"+k.getKlantNaam()+"', '"+k.getTelefoon()+"', '"+k.getMobiel()+"', '"+k.getPlaats()+"', '"+k.getLand()+"', '"+k.getPercentage()+"', '"+dg+"', '"+td+"') ";
             }
-        }query = query + ";";        
+        }
+        query = query + ";";        
         db1.sqlUpdate(query);
 
         //Sluiten van de verbinding

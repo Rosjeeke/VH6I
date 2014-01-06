@@ -19,7 +19,7 @@ public class AccessExtractor {
         klanten = new ArrayList<Klant>();
     }
     
-    public void extractor(String path)
+    public void extract(String path)
     {
         try
         {

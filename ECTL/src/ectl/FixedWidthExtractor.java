@@ -14,11 +14,11 @@ import java.util.ArrayList;
  *
  * @author Ivo
  */
-public class FixedWidthExtract {
+public class FixedWidthExtractor {
 
     private ArrayList<Klant> klantenfwe;
 
-    public FixedWidthExtract() {
+    public FixedWidthExtractor() {
         klantenfwe = new ArrayList<Klant>();
     }
 

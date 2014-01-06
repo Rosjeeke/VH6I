@@ -8,9 +8,13 @@ import java.util.ArrayList;
 
 public class CSVExtractor {
 	
-    private ArrayList<Klant> klanten = new ArrayList<Klant>();
+    private ArrayList<Klant> klanten;
+    
+    public CSVExtractor(){
+        klanten = new ArrayList<Klant>();
+    }
   
-    public void csvExtract(String path){
+    public void extract(String path){
 
             try{
                  BufferedReader in = new BufferedReader(new FileReader(path));
