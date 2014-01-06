@@ -70,12 +70,7 @@ public class Main {
 //        db1.sqlUpdate("DELETE FROM klant WHERE KlantNummer = '1'");
 
         //Sluiten van de verbinding
-        boolean y = false;
         db1.Sluitconnectie();
-        if (y) {
-            System.out.println("Database verbinding gesloten!");
-        } else {
-            System.out.println("Database verbinding niet gesloten!");
-        }
+        
     }
 }

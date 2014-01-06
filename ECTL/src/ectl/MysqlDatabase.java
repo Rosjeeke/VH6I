@@ -93,11 +93,11 @@ public class MysqlDatabase {
         try {
             if (con != null) {
                 con.close();
-                System.out.println("Database verbinding niet gesloten!");
+                System.out.println("Database verbinding gesloten!");
                 x = true;
             }
         } catch (SQLException e) {
-            System.out.println("Database verbinding gesloten!");
+            System.out.println("Database verbinding niet gesloten!");
             x = false;
         }
     }
