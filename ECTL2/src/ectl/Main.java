@@ -2,11 +2,7 @@
 package ectl;
 
 import ectl.Procedures.Transform;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  *
@@ -20,22 +16,13 @@ public class Main {
     private AccessExtractor access2;
     private CSVExtractor csv1;
     private CSVExtractor csv2;
-       
+    
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
         //Aanmaken nieuwe Database met de naam van de databank 
         MysqlDatabase db1 = new MysqlDatabase("myseconddwh");
-        
-        //date
-        Date datum = new Date();
-        SimpleDateFormat tijd = new SimpleDateFormat("HH:mm:ss");
-        SimpleDateFormat dag = new SimpleDateFormat("y-M-d");
-        String td = tijd.format(datum);
-        String dg = dag.format(datum);
-        
-        
         
         //Aanmaken van de verschillende extract klassen.
         ExcelExtract excel1 = new ExcelExtract();
@@ -46,12 +33,12 @@ public class Main {
         CSVExtractor csv2 = new CSVExtractor();
         
         //een klant toevoegen
-        access1.extractor(System.getProperty("user.home") + "\\Dropbox\\DVP6IB2 - junior BI-consultant\\Bronbestanden\\Klant2\\C1a.accdb");
-        access2.extractor(System.getProperty("user.home") + "\\Dropbox\\DVP6IB2 - junior BI-consultant\\Bronbestanden\\Klant2\\C1b.accdb");
-        excel1.read(System.getProperty("user.home") + "\\Dropbox\\DVP6IB2 - junior BI-consultant\\Bronbestanden\\Klant2\\C2a.xls");
-        excel2.read(System.getProperty("user.home") + "\\Dropbox\\DVP6IB2 - junior BI-consultant\\Bronbestanden\\Klant2\\C2b.xls");
-        csv1.csvExtract(System.getProperty("user.home")+"\\Dropbox\\DVP6IB2 - junior BI-consultant\\Bronbestanden\\Klant2\\C3a.txt");
-        csv2.csvExtract(System.getProperty("user.home")+"\\Dropbox\\DVP6IB2 - junior BI-consultant\\Bronbestanden\\Klant2\\C3b.txt");
+        //access1.extractor(System.getProperty("user.home") + "\\Dropbox\\DVP6IB2 - junior BI-consultant\\Bronbestanden\\Klant2\\c1a.mdb");
+        //access2.extractor(System.getProperty("user.home") + "\\Dropbox\\DVP6IB2 - junior BI-consultant\\Bronbestanden\\Klant2\\c1b.mdb");
+        excel1.read(System.getProperty("user.home") + "\\Dropbox\\DVP6IB2 - junior BI-consultant\\Bronbestanden\\Klant2\\c2a.xls");
+        excel2.read(System.getProperty("user.home") + "\\Dropbox\\DVP6IB2 - junior BI-consultant\\Bronbestanden\\Klant2\\c2b.xls");
+        csv1.csvExtract(("user.home") + "\\Dropbox\\DVP6IB2 - junior BI-consultant\\Bronbestanden\\Klant2\\c3a.txt");
+        csv2.csvExtract(("user.home") + "\\Dropbox\\DVP6IB2 - junior BI-consultant\\Bronbestanden\\Klant2\\c3b.txt");
         
         
         //fwe.extract(System.getProperty("user.home") + "\\Dropbox\\DVP6IB2 - junior BI-consultant\\Bronbestanden\\Klant2\\A4.txt");
@@ -70,15 +57,15 @@ public class Main {
         ArrayList<Klant> klanten = new ArrayList<Klant>();
         ArrayList<Klant> klantenexcel1 = excel1.getKlanten();
         ArrayList<Klant> klantenexcel2 = excel2.getKlanten();
-        ArrayList<Klant> klantenaccess1 = access1.getKlanten();
-        ArrayList<Klant> klantenaccess2 = access2.getKlanten();
+        //ArrayList<Klant> klantenaccess1 = access1.getKlanten();
+        //ArrayList<Klant> klantenaccess2 = access2.getKlanten();
         ArrayList<Klant> klantencsv1 = csv1.getKlanten();
         ArrayList<Klant> klantencsv2 = csv2.getKlanten();
         
         klanten.addAll(klantenexcel1);
         klanten.addAll(klantenexcel2);
-        klanten.addAll(klantenaccess1);
-        klanten.addAll(klantenaccess2);
+        //klanten.addAll(klantenaccess1);
+        //klanten.addAll(klantenaccess2);
         klanten.addAll(klantencsv1);
         klanten.addAll(klantencsv2);
         
@@ -86,28 +73,18 @@ public class Main {
         tf.Transformer();
         klanten = tf.getKlanten();
         
-        Set<Klant> clean = new HashSet<Klant>(klanten);
-        klanten = clean.toArray<Klant>();
         
         for(Klant k : klanten){
             
-            
-            //if(k.getKlantNummer()==181){
-            //    String out = k.getKlantNummer()+" "+k.getKlantNaam()+" "+k.getTelefoon()+" "+k.getMobiel()+" "+k.getPlaats()+" "+k.getLand()+" "+k.getPercentage().toString();
-            //    System.out.println(out);    
-            //}
-            
             if(i<1){
-                query = "INSERT INTO klant VALUES ('"+k.getKlantNummer()+"', '"+k.getKlantNaam()+"', '"+k.getTelefoon()+"', '"+k.getMobiel()+"', '"+k.getPlaats()+"', '"+k.getLand()+"', '"+k.getPercentage()+"', '"+dg+"', '"+td+"')";
-            //System.out.print(test);
-            //db1.sqlUpdate(test);
+            query = "INSERT INTO klant VALUES('"+k.getKlantNummer()+"', '"+k.getKlantNaam()+"', '"+k.getTelefoon()+"',"
+                        + " '"+k.getMobiel()+"', '"+k.getPlaats()+"', '"+k.getLand()+"', '"+k.getPercentage()+"' )";
             i++;}
             else{
-                query += ",('"+k.getKlantNummer()+"', '"+k.getKlantNaam()+"', '"+k.getTelefoon()+"', '"+k.getMobiel()+"', '"+k.getPlaats()+"', '"+k.getLand()+"', '"+k.getPercentage()+"', '"+dg+"', '"+td+"') ";
+                query += ",('"+k.getKlantNummer()+"', '"+k.getKlantNaam()+"', '"+k.getTelefoon()+"'," + " '"+k.getMobiel()+"', '"+k.getPlaats()+"', '"+k.getLand()+"', '"+k.getPercentage()+"' )";
             }
-        }query = query + ";";
-        //System.out.println(query);
-        //db1.sqlUpdate(query);
+        }
+        db1.sqlUpdate(query);
 //        db1.sqlUpdate("INSERT INTO klant VALUES('1' , 'J. van Drunen' , '0162686655', '0628956325', 'Made', 'NL', '5' )");
 //        //De gegevens in de database uitprinten
 
@@ -117,7 +94,7 @@ public class Main {
 
         //Sluiten van de verbinding
         boolean y = false;
-        y = db1.Sluitconnectie();
+        db1.Sluitconnectie();
         if (y) {
             System.out.println("Database verbinding gesloten!");
         } else {
