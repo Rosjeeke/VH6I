@@ -43,7 +43,6 @@ public class ExcelExtract {
                 Cell percentage = sheet.getCell(5, rij);
                 String perc = percentage.getContents();
                 BigDecimal percentageInt = new BigDecimal(perc.replace(",", "."));
-                        //Integer.parseInt(percentage.getContents());
                 
                 Klant nieuw = new Klant(nrInt, naam.getContents(), telefoon.getContents(), "", plaats.getContents(), land.getContents(), percentageInt);
                 klanten.add(nieuw);
@@ -59,17 +58,6 @@ public class ExcelExtract {
         
         
     }
-    
-    /*
-    public void print(){
-        int teller = 0;
-        int max = klanten.size();
-        while (teller<max){
-            System.out.println(klanten.get(teller));
-            teller++;
-        }
-    }
-    */
     
     public ArrayList<Klant> getKlanten(){
             return klanten;

@@ -32,7 +32,6 @@ public class CSVExtractor {
                         if (matcher.matches()) {
                             klantLand = matcher.group(1);
                         }
-                        //String klantLand = splitedString[5];
                         BigDecimal klantPercentage = new BigDecimal(splitedString[5]);
                         
                     Klant klant = new Klant(klantNummer, klantNaam, klantTelefoon, klantMobiel, klantPlaats, klantLand, klantPercentage);
