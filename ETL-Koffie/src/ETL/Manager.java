@@ -10,11 +10,13 @@ public class Manager
     
     public Manager()
     {
+        //aanmaken extractor
         ExcelExtract transform = new ExcelExtract();
         
         transform.infoScanRead(System.getProperty("user.home") + "\\Dropbox\\DVP6IB2 - junior BI-consultant\\Opdracht 6 BCG Matrix\\datadump1.xls", 3);
         transform.extractSwitch(System.getProperty("user.home") + "\\Dropbox\\DVP6IB2 - junior BI-consultant\\Opdracht 6 BCG Matrix\\datadump1.xls", 2);
-        
+       
+        //ophalen extracte gegevens in de vorm van Array's
         infoscan = transform.getKoffie();
         albert = transform.getAlbert();
         superboer = transform.getSuperboer();
@@ -29,8 +31,10 @@ public class Manager
         bonimarkt = transform.getBonimarkt();
         plus = transform.getPlus();
         
+        //database aanmaken
         db = new MysqlDatabase("koffie");
         
+        //Vullen van de database
         vulKoffieTijdVerkoper();
         vulVerkoopDatabase(albert, "Albert Heijn", db);
         vulVerkoopDatabase(superboer, "Super de Boer", db);
@@ -46,6 +50,7 @@ public class Manager
         vulVerkoopDatabase(plus, "Plus", db);    
     }
     
+    //Queries voor het invullen van de tabel koffie, tijd en verkoper
     private void vulKoffieTijdVerkoper()
     {
         db.sqlUpdate("INSERT INTO Tijd Values('1', '1', '2007'),('2', '2', '2007'),('3', '3', '2007'),('4', '4', '2007'),('5', '1', '2008'),('6', '2', '2008'),('7', '3', '2008'),('8', '4', '2008')");
@@ -72,6 +77,7 @@ public class Manager
         db.sqlUpdate(koffieQuery);
     }
     
+    //Queries voor het vullen van de tabel verkoop
     private void vulVerkoopDatabase(ArrayList<Koffie> koffie, String superMarkt, MysqlDatabase db)
     {
         int i = 1;
@@ -136,6 +142,7 @@ public class Manager
         db.sqlUpdate(query);
     }
     
+    //Sluiten van de database verbinding
     public void sluitDatabaseVerbinding()
     {
         boolean y = db.Sluitconnectie();
