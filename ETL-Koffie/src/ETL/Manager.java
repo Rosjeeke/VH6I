@@ -6,6 +6,7 @@ public class Manager
     {
     private MysqlDatabase db;
     private ArrayList<Koffie> infoscan, albert, superboer, c1000, superunie, coop, hoogvliet, jumbo, vomar, jan, deen, bonimarkt, plus;
+    private int verkoopID;
     
     public Manager()
     {
@@ -58,7 +59,7 @@ public class Manager
         {
             if(i<2)
             {
-                koffieQuery = "INSERT INTO koffie VALUES('"+i+"', '"+k.getMajorBrand()+"', '"+k.getApparaat()+"', '"+k.getType()+"', '"+k.getBeleving()+"', '"+k.getSoort()+"', '"+k.getFormaat()+"', '"+k.getSmaak()+"', '"+k.getUPC()+"' )";
+                koffieQuery = "INSERT INTO koffie VALUES('" + i + "', '" + k.getMajorBrand() + "', '" + k.getApparaat() + "', '" + k.getType() + "', '" + k.getBeleving() + "', '" + k.getSoort() + "', '" + k.getFormaat() + "', '" + k.getSmaak() + "', '" + k.getUPC() + "' )";
                 i++;
             }
             
@@ -121,15 +122,15 @@ public class Manager
         {
             if(i<2)
             {
-                query = "INSERT INTO Verkoop VALUES('1','"+markt+"','"+i+"','"+kof.getEenKwartaalZeven()+"'),('2','"+markt+"','"+i+"','"+kof.getTweeKwartaalZeven()+"'),('3','"+markt+"','"+i+"','"+kof.getDrieKwartaalZeven()+"'),('4','"+markt+"','"+i+"','"+kof.getVierKwartaalZeven()+"')"
-                        + ",('5','"+markt+"','"+i+"','"+kof.getEenKwartaalAcht()+"'),('6','"+markt+"','"+i+"','"+kof.getTweeKwartaalAcht()+"'),('7','"+markt+"','"+i+"','"+kof.getDrieKwartaalAcht()+"'),('8','"+markt+"','"+i+"','"+kof.getVierKwartaalAcht()+"')";
+                query = "INSERT INTO Verkoop VALUES('" + verkoopID++ + "', '1','" + markt + "','" + i + "','" + kof.getEenKwartaalZeven() + "'),('" + verkoopID++ + "', '2','" + markt + "','" + i + "','" + kof.getTweeKwartaalZeven() + "'),('" + verkoopID++ + "', '3','" + markt + "','" + i + "','" + kof.getDrieKwartaalZeven() + "'),('" + verkoopID++ + "', '4','" + markt + "','" + i + "','" + kof.getVierKwartaalZeven() + "')"
+                        + ",('" + verkoopID++ + "', '5','" + markt + "','" + i + "','" + kof.getEenKwartaalAcht() + "'),('" + verkoopID++ + "', '6','" + markt + "','" + i + "','" + kof.getTweeKwartaalAcht() + "'),('" + verkoopID++ + "', '7','" + markt + "','" + i + "','" + kof.getDrieKwartaalAcht() + "'),('" + verkoopID++ + "', '8','" + markt + "','" + i + "','" + kof.getVierKwartaalAcht() + "')";
                 i++;
             }
             
             else
             {
-                query += ",('1','"+markt+"','"+i+"','"+kof.getEenKwartaalZeven()+"'),('2','"+markt+"','"+i+"','"+kof.getTweeKwartaalZeven()+"'),('3','"+markt+"','"+i+"','"+kof.getDrieKwartaalZeven()+"'),('4','"+markt+"','"+i+"','"+kof.getVierKwartaalZeven()+"')"
-                        + ",('5','"+markt+"','"+i+"','"+kof.getEenKwartaalAcht()+"'),('6','"+markt+"','"+i+"','"+kof.getTweeKwartaalAcht()+"'),('7','"+markt+"','"+i+"','"+kof.getDrieKwartaalAcht()+"'),('8','"+markt+"','"+i+"','"+kof.getVierKwartaalAcht()+"')";
+                query += ",('" + verkoopID++ + "', '1','" + markt + "','" + i + "','" + kof.getEenKwartaalZeven() + "'),('" + verkoopID++ + "', '2','" + markt + "','" + i + "','" + kof.getTweeKwartaalZeven() + "'),('" + verkoopID++ + "', '3','" + markt + "','" + i + "','" + kof.getDrieKwartaalZeven() + "'),('" + verkoopID++ + "', '4','" + markt + "','" + i + "','" + kof.getVierKwartaalZeven() + "')"
+                        + ",('" + verkoopID++ + "', '5','" + markt + "','" + i + "','" + kof.getEenKwartaalAcht() + "'),('" + verkoopID++ + "', '6','" + markt + "','" + i + "','" + kof.getTweeKwartaalAcht() + "'),('" + verkoopID++ + "', '7','" + markt + "','" + i + "','" + kof.getDrieKwartaalAcht() + "'),('" + verkoopID++ + "', '8','" + markt + "','" + i + "','" + kof.getVierKwartaalAcht() + "')";
             }   
         }
         db.sqlUpdate(query);
