@@ -26,6 +26,8 @@ public class ExcelExtract {
             Workbook workbook = Workbook.getWorkbook(new File(bestand));
             Sheet sheet = workbook.getSheet(0);
 
+            //Zolang de rij kleiner is dan de laatste van dezelfde supermarkt loopt de loop
+            //hij haalt voor iedere de regel uit elkaar en scheid de kolommen
             int rij = begin;
             int eind = sheet.findCell("Albert Heijn").getRow() - 1;
             while (rij < eind) 
@@ -91,6 +93,8 @@ public class ExcelExtract {
             Sheet sheet = workbook1.getSheet(0);
             aantalrijen = sheet.getRows();
 
+            //Hier wordt bepaald welke regel de eerste en laatste regel per supermarkt zijn.
+            //Het einde is de tweede supermarkt, hier wordt later 1 regel vanaf gehaald
             while (begin < aantalrijen) 
             {
                 Cell code = sheet.getCell(1, begin);
@@ -162,6 +166,8 @@ public class ExcelExtract {
     }
     
     public int readSales(String bestand, String beginSupermarkt, String eindSupermarkt,Sheet sheet, ArrayList<Koffie> supermarktLijst){
+        //Toevoegen van de Majorbrand, Apparaat, type, beleving, smaak, soort, formaat, UPC
+        
         int begin = sheet.findCell(beginSupermarkt).getRow();
         int eind = sheet.findCell(eindSupermarkt).getRow() - 1;
         for(Koffie k : getKoffie())
@@ -174,11 +180,13 @@ public class ExcelExtract {
     
 
     public void superMarktRead(String bestand, int beginSupermarkt, int eindSupermarkt, String superMarkt, Sheet sheet, ArrayList<Koffie> lijst) {
+        //De loop loopt zolang de huidige supermarkt regel minder is dan de laatste supermarktregel
         while (beginSupermarkt < eindSupermarkt) 
         {
             String regel = sheet.getCell(1, beginSupermarkt).getContents();
             if (regel.contains("(")) 
             {
+                //Dit is de pattern van de UPC
                 Pattern pattern = Pattern.compile(".* \\((\\d+)\\)");
                 Matcher matcher = pattern.matcher(regel);
 
@@ -191,6 +199,10 @@ public class ExcelExtract {
                 {
                     if (upc.equals(a.getUPC())) 
                     {
+                        //Hij haalt de waarde op voor het eerste kwartaal van 2007
+                        //Hij controleert of de kolom leeg is, als de kolom leeg is controleert hij of de regel daarboven leeg is.
+                        //Dit doet hij net zolang tot hij een waarde tegenkomt.
+                        //Zodra hij een waarde tegenkomt haalt hij de waarde uit de overige kolommen voor dezelfde regel
                         String kwartaalEenZeven = sheet.getCell(2, beginSupermarkt).getContents();
                         if (kwartaalEenZeven.isEmpty()) 
                         {
