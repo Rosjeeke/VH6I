@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package ETL;
 
 import java.io.File;
@@ -16,100 +12,90 @@ import jxl.Sheet;
 import jxl.Workbook;
 import jxl.read.biff.BiffException;
 
-/**
- *
- * @author Liannie
- */
 public class ExcelExtract {
 
     private ArrayList<Koffie> koffie = new ArrayList<Koffie>();
-//    private ArrayList<Koffie> superMarkten = new ArrayList<>();
     private ArrayList<Koffie> albert, superboer, c1000, superunie, coop, hoogvliet, jumbo, vomar, jan, deen, bonimarkt, plus;
-    private String brand, apparaat, type, beleving, soort, formaat, smaak, upc,
-            vorige1, vorige2, vorige3, vorige4, vorige5;
+    private String brand, apparaat, type, beleving, soort, formaat, smaak, upc, vorige1, vorige2, vorige3, vorige4, vorige5;
     private int aantalrijen;
-//    private ExcelExtract extract = new ExcelExtract();
 
-    public ExcelExtract() {
-        
-    }
-
-    public void infoScanRead(String bestand, int begin) {
-        try {
+    public void infoScanRead(String bestand, int begin) 
+    {
+        try 
+        {
             Workbook workbook = Workbook.getWorkbook(new File(bestand));
             Sheet sheet = workbook.getSheet(0);
 
             int rij = begin;
             int eind = sheet.findCell("Albert Heijn").getRow() - 1;
-            while (rij < eind) {
+            while (rij < eind) 
+            {
                 Cell code = sheet.getCell(0, rij);
                 Cell string = sheet.getCell(1, rij);
 
-                switch ((code.getContents()).toString()) {
+                switch ((code.getContents()).toString()) 
+                {
                     case "MAJOR.BRAND":
                         brand = string.getContents().trim();
-//                        System.out.println("Major brand: " + brand);
                         break;
                     case "APPARAAT":
                         setApparaat(string.getContents().replace(brand, "").trim());
-//                        System.out.println("Apparaat: " + apparaat);
                         break;
                     case "TYPE":
                         vorige1 = brand + " " + getApparaat();
                         type = string.getContents().replace(vorige1, "").trim();
-//                        System.out.println("Type: " + type);
                         break;
                     case "BELEVING":
                         vorige2 = vorige1 + " " + type;
                         beleving = string.getContents().replace(vorige2, "").trim();
-//                        System.out.println("Beleving: " + beleving);
                         break;
                     case "SOORT":
                         vorige3 = vorige2 + " " + beleving;
                         soort = string.getContents().replace(vorige3, "").trim();
-//                        System.out.println("Soort: " + soort);
                         break;
                     case "FORMAAT":
                         vorige4 = vorige3 + " " + soort;
                         formaat = string.getContents().replace(vorige4, "").trim();
-//                        System.out.println("Formaat: " + formaat);
                         break;
                     case "SMAAK":
                         setVorige5(brand + " " + getApparaat() + " " + type + " " + soort + " " + formaat);
                         smaak = string.getContents().replace(getVorige5(), "").trim();
-//                        System.out.println("Smaak: " + smaak);
                         break;
                     case "UPC":
                         Pattern pattern = Pattern.compile(".* \\((\\d+)\\)");
                         Matcher matcher = pattern.matcher(string.getContents());
 
-                        if (matcher.matches()) {
+                        if (matcher.matches()) 
+                        {
                             upc = matcher.group(1);
                         }
 
-//                        System.out.println("UPC: " + upc);
                         Koffie kf = new Koffie(brand, getApparaat(), type, beleving, soort, formaat, smaak, upc, "", "", "", "", "", "", "", "", "");
-
                         getKoffie().add(kf);
-
                         break;
                 }
                 rij++;
             }
-        } catch (IOException | BiffException ex) {
+        } 
+        catch (IOException | BiffException ex) 
+        {
             Logger.getLogger(ExcelExtract.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
-    public void extractSwitch(String bestand, int begin) {
-        try {
+    public void extractSwitch(String bestand, int begin) 
+    {
+        try 
+        {
             Workbook workbook1 = Workbook.getWorkbook(new File(bestand));
             Sheet sheet = workbook1.getSheet(0);
             aantalrijen = sheet.getRows();
 
-            while (begin < aantalrijen) {
+            while (begin < aantalrijen) 
+            {
                 Cell code = sheet.getCell(1, begin);
-                switch ((code.getContents()).toString()) {
+                switch ((code.getContents()).toString()) 
+                {
                     case "Albert Heijn":
                         albert = new ArrayList<>();
                         begin = readSales(bestand, "Albert Heijn", " Super de Boer", sheet, getAlbert());
@@ -158,9 +144,9 @@ public class ExcelExtract {
                         int beginPL = sheet.findCell(" Plus").getRow();
                         int eindPL = sheet.getRows();
                         plus = new ArrayList<Koffie>();
-                        for(Koffie k : getKoffie()){
-                            getPlus().add(k.getNewCopy(k.getMajorBrand(), k.getApparaat(), k.getType(), k.getBeleving(), k.getSoort(),
-                                    k.getFormaat(), k.getSmaak(), k.getUPC(), "","","","","","","","", k.getSuperMarkt()));
+                        for(Koffie k : getKoffie())
+                        {
+                            getPlus().add(k.getNewCopy(k.getMajorBrand(), k.getApparaat(), k.getType(), k.getBeleving(), k.getSoort(), k.getFormaat(), k.getSmaak(), k.getUPC(), "","","","","","","","", k.getSuperMarkt()));
                         }
                         superMarktRead(bestand, beginPL, eindPL, "Plus", sheet, getPlus());
                         begin = eindPL;
@@ -168,46 +154,52 @@ public class ExcelExtract {
                 }
                 begin++;
             }
-        } catch (IOException | BiffException ex) {
+        } 
+        catch (IOException | BiffException ex) 
+        {
             Logger.getLogger(ExcelExtract.class.getName()).log(Level.SEVERE, null, ex);
         }
-
     }
     
     public int readSales(String bestand, String beginSupermarkt, String eindSupermarkt,Sheet sheet, ArrayList<Koffie> supermarktLijst){
         int begin = sheet.findCell(beginSupermarkt).getRow();
         int eind = sheet.findCell(eindSupermarkt).getRow() - 1;
-        for(Koffie k : getKoffie()){
-            supermarktLijst.add(k.getNewCopy(k.getMajorBrand(), k.getApparaat(), k.getType(), k.getBeleving(), k.getSoort(),
-                    k.getFormaat(), k.getSmaak(), k.getUPC(), "","","","","","","","", k.getSuperMarkt()));
+        for(Koffie k : getKoffie())
+        {
+            supermarktLijst.add(k.getNewCopy(k.getMajorBrand(), k.getApparaat(), k.getType(), k.getBeleving(), k.getSoort(), k.getFormaat(), k.getSmaak(), k.getUPC(), "","","","","","","","", k.getSuperMarkt()));
         }
-        
         superMarktRead(bestand, begin, eind, beginSupermarkt.trim(), sheet, supermarktLijst);
         return eind;
     }
     
 
     public void superMarktRead(String bestand, int beginSupermarkt, int eindSupermarkt, String superMarkt, Sheet sheet, ArrayList<Koffie> lijst) {
-        while (beginSupermarkt < eindSupermarkt) {
+        while (beginSupermarkt < eindSupermarkt) 
+        {
             String regel = sheet.getCell(1, beginSupermarkt).getContents();
-            if (regel.contains("(")) {
+            if (regel.contains("(")) 
+            {
                 Pattern pattern = Pattern.compile(".* \\((\\d+)\\)");
                 Matcher matcher = pattern.matcher(regel);
 
-                if (matcher.matches()) {
+                if (matcher.matches()) 
+                {
                     upc = matcher.group(1);
                 }
 
-                for (Koffie a : lijst) {
-                    if (upc.equals(a.getUPC())) {
+                for (Koffie a : lijst) 
+                {
+                    if (upc.equals(a.getUPC())) 
+                    {
                         String kwartaalEenZeven = sheet.getCell(2, beginSupermarkt).getContents();
-
-                        if (kwartaalEenZeven.isEmpty()) {
+                        if (kwartaalEenZeven.isEmpty()) 
+                        {
                             boolean gaVerder = true;
-                            for (int i = 1; i < 100 && gaVerder; i++) {
-
+                            for (int i = 1; i < 100 && gaVerder; i++) 
+                            {
                                 kwartaalEenZeven = sheet.getCell(2, beginSupermarkt - i).getContents();
-                                if (kwartaalEenZeven.isEmpty() == false) {
+                                if (kwartaalEenZeven.isEmpty() == false) 
+                                {
                                     kwartaalEenZeven = sheet.getCell(2, beginSupermarkt - i).getContents();
                                     String kwartaalTweeZeven = sheet.getCell(3, beginSupermarkt - i).getContents();
                                     String kwartaalDrieZeven = sheet.getCell(4, beginSupermarkt - i).getContents();
@@ -225,11 +217,12 @@ public class ExcelExtract {
                                     a.setDrieKwartaalAcht(kwartaalDrieAcht);
                                     a.setVierKwartaalAcht(kwartaalVierAcht);
                                     a.setSuperMarkt(superMarkt);
-//                                    System.out.println(superMarkt + " " + a.getUPC() + " " + kwartaalEenZeven + " " + kwartaalTweeZeven + " " + kwartaalDrieZeven + " " + kwartaalVierZeven + " " + kwartaalEenAcht + " " + kwartaalTweeAcht + " " + kwartaalDrieAcht + " " + kwartaalVierAcht);
                                     gaVerder = false;
                                 }
                             }
-                        } else {
+                        } 
+                        else 
+                        {
                             kwartaalEenZeven = sheet.getCell(2, beginSupermarkt).getContents();
                             String kwartaalTweeZeven = sheet.getCell(3, beginSupermarkt).getContents();
                             String kwartaalDrieZeven = sheet.getCell(4, beginSupermarkt).getContents();
@@ -247,82 +240,96 @@ public class ExcelExtract {
                             a.setDrieKwartaalAcht(kwartaalDrieAcht);
                             a.setVierKwartaalAcht(kwartaalVierAcht);
                             a.setSuperMarkt(superMarkt);
-//                            System.out.println(superMarkt + " " + a.getUPC() + " " + kwartaalEenZeven + " " + kwartaalTweeZeven + " " + kwartaalDrieZeven + " " + kwartaalVierZeven + " " + kwartaalEenAcht + " " + kwartaalTweeAcht + " " + kwartaalDrieAcht + " " + kwartaalVierAcht);
-
                         }
                     }
                 }
             }
             beginSupermarkt++;
         }
-        System.out.println(superMarkt);
     }
 
-    public ArrayList<Koffie> getAlbert() {
+    public ArrayList<Koffie> getAlbert() 
+    {
         return albert;
     }
 
-    public ArrayList<Koffie> getSuperboer() {
+    public ArrayList<Koffie> getSuperboer() 
+    {
         return superboer;
     }
 
-    public ArrayList<Koffie> getC1000() {
+    public ArrayList<Koffie> getC1000() 
+    {
         return c1000;
     }
 
-    public ArrayList<Koffie> getSuperunie() {
+    public ArrayList<Koffie> getSuperunie() 
+    {
         return superunie;
     }
 
-    public ArrayList<Koffie> getCoop() {
+    public ArrayList<Koffie> getCoop() 
+    {
         return coop;
     }
 
-    public ArrayList<Koffie> getHoogvliet() {
+    public ArrayList<Koffie> getHoogvliet() 
+    {
         return hoogvliet;
     }
 
-    public ArrayList<Koffie> getJumbo() {
+    public ArrayList<Koffie> getJumbo() 
+    {
         return jumbo;
     }
 
-    public ArrayList<Koffie> getVomar() {
+    public ArrayList<Koffie> getVomar() 
+    {
         return vomar;
     }
 
-    public ArrayList<Koffie> getJan() {
+    public ArrayList<Koffie> getJan() 
+    {
         return jan;
     }
 
-    public ArrayList<Koffie> getDeen() {
+    public ArrayList<Koffie> getDeen() 
+    {
         return deen;
     }
 
-    public ArrayList<Koffie> getBonimarkt() {
+    public ArrayList<Koffie> getBonimarkt() 
+    {
         return bonimarkt;
     }
 
-    public ArrayList<Koffie> getPlus() {
+    public ArrayList<Koffie> getPlus() 
+    {
         return plus;
     }
 
-    public String getApparaat() {
+    public String getApparaat() 
+    {
         return apparaat;
     }
 
-    public void setApparaat(String apparaat) {
+    public void setApparaat(String apparaat) 
+    {
         this.apparaat = apparaat;
     }
 
-    public ArrayList<Koffie> getKoffie() {
+    public ArrayList<Koffie> getKoffie() 
+    {
         return koffie;
     }
 
-    public String getVorige5() {
+    public String getVorige5() 
+    {
         return vorige5;
     }
 
-    public void setVorige5(String vorige5) {
+    public void setVorige5(String vorige5) 
+    {
         this.vorige5 = vorige5;
     }
 }
